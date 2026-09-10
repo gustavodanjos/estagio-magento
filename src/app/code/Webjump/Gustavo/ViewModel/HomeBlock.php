@@ -3,24 +3,43 @@ declare(strict_types=1);
 
 namespace Webjump\Gustavo\ViewModel;
 
+use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
+use Magento\Store\Model\ScopeInterface;
 
 class HomeBlock implements ArgumentInterface
 {
+    public const XML_PATH_TITLE = 'webjump_gustavo/general/title';
+    public const XML_PATH_WELCOME_MESSAGE = 'webjump_gustavo/general/welcome_message';
+
+    public const DEFAULT_TITLE = 'Webjump Gustavo - Home Block';
+    public const DEFAULT_WELCOME_MESSAGE = 'Bloco renderizado na página inicial utilizando a arquitetura de ViewModels do Magento 2.';
+
     public function __construct(
-        private readonly TimezoneInterface $timezone
+        private readonly TimezoneInterface $timezone,
+        private readonly ScopeConfigInterface $scopeConfig
     ) {
     }
 
     public function getTitle(): string
     {
-        return 'Webjump Gustavo - Home Block';
+        $value = trim((string) $this->scopeConfig->getValue(
+            self::XML_PATH_TITLE,
+            ScopeInterface::SCOPE_STORE
+        ));
+
+        return $value !== '' ? $value : self::DEFAULT_TITLE;
     }
 
     public function getWelcomeMessage(): string
     {
-        return 'Bloco renderizado na página inicial utilizando a arquitetura de ViewModels do Magento 2.';
+        $value = trim((string) $this->scopeConfig->getValue(
+            self::XML_PATH_WELCOME_MESSAGE,
+            ScopeInterface::SCOPE_STORE
+        ));
+
+        return $value !== '' ? $value : self::DEFAULT_WELCOME_MESSAGE;
     }
 
     public function getFormattedCurrentDate(): string
