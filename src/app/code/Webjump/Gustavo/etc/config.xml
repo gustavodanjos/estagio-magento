@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <webjump_gustavo>
+            <general>
+                <title>Webjump Gustavo - Home Block</title>
+                <welcome_message>Bloco renderizado na página inicial utilizando a arquitetura de ViewModels do Magento 2.</welcome_message>
+            </general>
+        </webjump_gustavo>
+    </default>
+</config>
