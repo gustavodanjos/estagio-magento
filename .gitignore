@@ -1,33 +1,54 @@
-/src/*
+# Ignore everything by default
+*
 
+# Repository files
+!/.gitignore
+!/README.md
+!/compose.yaml
+!/Makefile
+!/composer.json
+
+# Scripts
+!/bin/
+!/bin/**
+
+# Documentation
+!/docs/
+!/docs/**
+
+# Custom Magento code
+!/src/
 !/src/app/
-/src/app/*
-
+!/src/app/*/
 !/src/app/code/
-/src/app/code/*
-!/src/app/code/Webjump/
-/src/app/code/Webjump/*
-
+!/src/app/code/**
 !/src/app/etc/
-/src/app/etc/*
 !/src/app/etc/config.php
 
-compose.versions.yaml
-compose.healthcheck.yaml.bak
-env/
-docker-magento-rootCA.pem
-rootCA.pem
-/src/auth.json
-/src/app/etc/env.php
+# Local / environment files
 .env
 .env.*
 !.env.example
 
+/env/
+/src/auth.json
+/src/app/etc/env.php
+
+# Local setup artifacts
+compose.versions.yaml
+compose.healthcheck.yaml.bak
+docker-magento-rootCA.pem
+rootCA.pem
+
+# IDE
 .idea/
 .vscode/
 
+# OS
 .DS_Store
 Thumbs.db
+
+# Temporary files
 *.log
 *.tmp
 *.temp

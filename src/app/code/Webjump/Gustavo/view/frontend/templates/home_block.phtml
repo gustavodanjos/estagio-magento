@@ -1,0 +1,43 @@
+<?php
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+
+/** @var \Webjump\Gustavo\ViewModel\HomeBlock|null $viewModel */
+$viewModel = $block->getData('view_model');
+if (!$viewModel instanceof \Webjump\Gustavo\ViewModel\HomeBlock) {
+    return;
+}
+?>
+<section class="webjump-home-block" aria-labelledby="webjump-home-block-title">
+    <div class="webjump-home-block__header">
+        <span class="webjump-home-block__badge">
+            <?= $escaper->escapeHtml(__('Webjump Module')) ?>
+        </span>
+        <h2 id="webjump-home-block-title" class="webjump-home-block__title">
+            <?= $escaper->escapeHtml($viewModel->getTitle()) ?>
+        </h2>
+    </div>
+
+    <p class="webjump-home-block__message">
+        <?= $escaper->escapeHtml($viewModel->getWelcomeMessage()) ?>
+    </p>
+
+    <div class="webjump-home-block__meta">
+        <span class="webjump-home-block__meta-label">
+            <?= $escaper->escapeHtml(__('Data do Sistema:')) ?>
+        </span>
+        <time class="webjump-home-block__meta-time">
+            <?= $escaper->escapeHtml($viewModel->getFormattedCurrentDate()) ?>
+        </time>
+    </div>
+
+    <ul class="webjump-home-block__list">
+        <?php foreach ($viewModel->getHighlights() as $highlight): ?>
+            <li class="webjump-home-block__list-item">
+                <?= $escaper->escapeHtml($highlight) ?>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+</section>
