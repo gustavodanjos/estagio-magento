@@ -1,0 +1,18 @@
+<?php
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Webjump\Gustavo\ViewModel\ProductSeloSustentavel $viewModel
+ */
+$viewModel = $block->getData('view_model');
+if (!$viewModel instanceof \Webjump\Gustavo\ViewModel\ProductSeloSustentavel) {
+    return;
+}
+
+if (!$viewModel->hasSeloSustentavel()) {
+    return;
+}
+?>
+<div class="selo-sustentavel selo-sustentavel--pdp" data-selo="sustentavel">
+    <span class="selo-sustentavel__icon" aria-hidden="true"></span>
+    <span class="selo-sustentavel__label"><?= $block->escapeHtml(__('Produto Sustentável')) ?></span>
+</div>

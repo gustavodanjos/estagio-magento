@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="product.info.main">
+            <block class="Magento\Framework\View\Element\Template"
+                   name="product.selo.sustentavel"
+                   template="Webjump_Gustavo::product/view/selo.phtml"
+                   after="product.info.price">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Webjump\Gustavo\ViewModel\ProductSeloSustentavel</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+        <referenceBlock name="catalog.product.related">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Webjump_Gustavo::product/list/items.phtml</argument>
+            </action>
+            <block class="Magento\Framework\View\Element\Template"
+                   name="selo_sustentavel"
+                   template="Webjump_Gustavo::product/badge/selo_sustentavel.phtml" />
+        </referenceBlock>
+        <referenceBlock name="product.info.upsell">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Webjump_Gustavo::product/list/items.phtml</argument>
+            </action>
+            <block class="Magento\Framework\View\Element\Template"
+                   name="selo_sustentavel"
+                   template="Webjump_Gustavo::product/badge/selo_sustentavel.phtml" />
+        </referenceBlock>
+        <referenceBlock name="checkout.cart.crosssell">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Webjump_Gustavo::product/list/items.phtml</argument>
+            </action>
+            <block class="Magento\Framework\View\Element\Template"
+                   name="selo_sustentavel"
+                   template="Webjump_Gustavo::product/badge/selo_sustentavel.phtml" />
+        </referenceBlock>
+    </body>
+</page>
