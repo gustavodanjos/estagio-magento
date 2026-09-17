@@ -1,0 +1,17 @@
+{
+    "webjump_gustavo_review": {
+        "column": {
+            "review_id": true,
+            "product_id": true,
+            "author": true,
+            "comment": true,
+            "rating": true,
+            "is_approved": true,
+            "created_at": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "WEBJUMP_GUSTAVO_REVIEW_PRD_ID_CAT_PRD_ENTT_ENTT_ID": true
+        }
+    }
+}
