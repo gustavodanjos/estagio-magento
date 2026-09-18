@@ -1,0 +1,22 @@
+<?php
+/**
+ * Partial template for rendering the Selo Sustentável badge
+ *
+ * @var \Magento\Framework\View\Element\Template $block
+ */
+$_product = $block->getData('_product');
+if (!$_product) {
+    return;
+}
+
+$seloValue = $_product->getData('selo_sustentavel');
+$hasSelo = $seloValue === '1' || $seloValue === 1 || $seloValue === true;
+
+if (!$hasSelo) {
+    return;
+}
+?>
+<div class="selo-sustentavel selo-sustentavel--card" data-selo="sustentavel">
+    <span class="selo-sustentavel__icon" aria-hidden="true"></span>
+    <span class="selo-sustentavel__label"><?= $block->escapeHtml(__('Sustentável')) ?></span>
+</div>

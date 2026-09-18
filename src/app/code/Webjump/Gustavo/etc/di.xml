@@ -3,4 +3,11 @@
     <preference for="Webjump\Gustavo\Api\Data\ReviewInterface" type="Webjump\Gustavo\Model\Review"/>
     <preference for="Webjump\Gustavo\Api\Data\ReviewSearchResultsInterface" type="Webjump\Gustavo\Model\ReviewSearchResults"/>
     <preference for="Webjump\Gustavo\Api\ReviewRepositoryInterface" type="Webjump\Gustavo\Model\ReviewRepository"/>
+
+    <type name="Magento\Catalog\Block\Product\ListProduct">
+        <plugin name="webjump_gustavo_listproduct_template"
+                type="Webjump\Gustavo\Plugin\Catalog\Block\Product\ListProductTemplate"
+                sortOrder="10"
+                disabled="false"/>
+    </type>
 </config>
