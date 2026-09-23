@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Webjump_Gustavo::webjump" title="Webjump" module="Webjump_Gustavo"
+             sortOrder="100" resource="Webjump_Gustavo::webjump"/>
+        <add id="Webjump_Gustavo::review" title="Avaliações" module="Webjump_Gustavo"
+             sortOrder="10" parent="Webjump_Gustavo::webjump"
+             action="webjump_gustavo/review/index"
+             resource="Webjump_Gustavo::review"/>
+    </menu>
+</config>
