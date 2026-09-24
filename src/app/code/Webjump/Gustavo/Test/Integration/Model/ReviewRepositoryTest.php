@@ -4,20 +4,25 @@ declare(strict_types=1);
 
 namespace Webjump\Gustavo\Test\Integration\Model;
 
-use Magento\Catalog\Api\ProductRepositoryInterface;
+use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\TestFramework\Fixture\DataFixture;
+use Magento\TestFramework\Fixture\DataFixtureStorage;
+use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
 use Webjump\Gustavo\Api\Data\ReviewInterface;
 use Webjump\Gustavo\Api\Data\ReviewInterfaceFactory;
 use Webjump\Gustavo\Api\ReviewRepositoryInterface;
 
+#[DataFixture(ProductFixture::class, ['sku' => 'simple'], 'simple_product')]
 class ReviewRepositoryTest extends TestCase
 {
     private $reviewRepository;
     private $reviewFactory;
     private $searchCriteriaBuilder;
+    private DataFixtureStorage $fixtures;
 
     protected function setUp(): void
     {
@@ -25,6 +30,7 @@ class ReviewRepositoryTest extends TestCase
         $this->reviewRepository = $objectManager->get(ReviewRepositoryInterface::class);
         $this->reviewFactory = $objectManager->get(ReviewInterfaceFactory::class);
         $this->searchCriteriaBuilder = $objectManager->get(SearchCriteriaBuilder::class);
+        $this->fixtures = DataFixtureStorageManager::getStorage();
     }
 
     public function testSaveCreatesReview(): void
@@ -105,7 +111,8 @@ class ReviewRepositoryTest extends TestCase
 
     private function getFixtureProductId(): int
     {
-        $productRepository = Bootstrap::getObjectManager()->get(ProductRepositoryInterface::class);
-        return (int)$productRepository->get('simple')->getId();
+        $product = $this->fixtures->get('simple_product');
+
+        return (int)$product->getId();
     }
 }
