@@ -10,6 +10,14 @@
                     <argument name="view_model" xsi:type="object">Webjump\Gustavo\ViewModel\ProductSeloSustentavel</argument>
                 </arguments>
             </block>
+            <block class="Magento\Framework\View\Element\Template"
+                   name="product.reviews.list"
+                   template="Webjump_Gustavo::product/review/list.phtml"
+                   after="product.selo.sustentavel">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Webjump\Gustavo\ViewModel\ProductReviews</argument>
+                </arguments>
+            </block>
         </referenceContainer>
         <referenceBlock name="catalog.product.related">
             <action method="setTemplate">
