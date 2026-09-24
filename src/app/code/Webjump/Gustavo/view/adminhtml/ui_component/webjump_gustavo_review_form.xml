@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">webjump_gustavo_review_form.webjump_gustavo_review_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Avaliação</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="back" class="Webjump\Gustavo\Block\Adminhtml\Review\Edit\BackButton"/>
+            <button name="delete" class="Webjump\Gustavo\Block\Adminhtml\Review\Edit\DeleteButton"/>
+            <button name="reset" class="Webjump\Gustavo\Block\Adminhtml\Review\Edit\ResetButton"/>
+            <button name="save_and_continue" class="Webjump\Gustavo\Block\Adminhtml\Review\Edit\SaveAndContinueButton"/>
+            <button name="save" class="Webjump\Gustavo\Block\Adminhtml\Review\Edit\SaveButton"/>
+        </buttons>
+        <namespace>webjump_gustavo_review_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>webjump_gustavo_review_form.webjump_gustavo_review_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="webjump_gustavo_review_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="*/*/save"/>
+        </settings>
+        <dataProvider class="Webjump\Gustavo\Model\Review\DataProvider" name="webjump_gustavo_review_form_data_source">
+            <settings>
+                <requestFieldName>review_id</requestFieldName>
+                <primaryFieldName>review_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general">
+        <settings>
+            <label translate="true">Informações da avaliação</label>
+        </settings>
+        <field name="review_id" formElement="hidden">
+            <settings>
+                <dataType>text</dataType>
+                <dataScope>review_id</dataScope>
+            </settings>
+        </field>
+        <field name="product_id" formElement="hidden">
+            <settings>
+                <dataType>number</dataType>
+                <dataScope>product_id</dataScope>
+            </settings>
+        </field>
+        <field name="product_label" sortOrder="10" component="Webjump_Gustavo/js/form/element/product-picker" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="elementTmpl" xsi:type="string">Webjump_Gustavo/form/element/product-picker</item>
+                    <item name="targetField" xsi:type="string">product_id</item>
+                    <item name="modalTarget" xsi:type="string">webjump_gustavo_review_form.webjump_gustavo_review_form.product_select_modal</item>
+                    <item name="placeholder" xsi:type="string" translate="true">Nenhum produto selecionado</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Produto</label>
+                <visible>true</visible>
+                <notice translate="true">Clique em "Selecionar produto" para escolher em um grid com busca e filtros.</notice>
+            </settings>
+        </field>
+        <field name="author" sortOrder="20" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Autor</label>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="comment" sortOrder="30" formElement="textarea">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Comentário</label>
+            </settings>
+        </field>
+        <field name="rating" sortOrder="40" formElement="select">
+            <settings>
+                <dataType>number</dataType>
+                <label translate="true">Nota</label>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Webjump\Gustavo\Model\Config\Source\Rating"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="is_approved" sortOrder="50" formElement="checkbox">
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Aprovado</label>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="string">0</map>
+                            <map name="true" xsi:type="string">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+    </fieldset>
+    <modal name="product_select_modal">
+        <settings>
+            <options>
+                <option name="title" xsi:type="string" translate="true">Selecionar produto</option>
+            </options>
+        </settings>
+        <insertListing name="webjump_gustavo_product_listing" component="Magento_Ui/js/form/components/insert-listing">
+            <settings>
+                <dataLinks>
+                    <exports>false</exports>
+                    <imports>false</imports>
+                </dataLinks>
+                <externalProvider>webjump_gustavo_product_listing.webjump_gustavo_product_listing_data_source</externalProvider>
+                <autoRender>true</autoRender>
+                <ns>webjump_gustavo_product_listing</ns>
+                <dataScope>webjump_gustavo_product_listing</dataScope>
+                <renderUrl path="mui/index/render"/>
+            </settings>
+        </insertListing>
+    </modal>
+    <component name="product_select_handler" class="Magento\Ui\Component\Container" component="Webjump_Gustavo/js/grid/columns/product-select-handler"/>
+</form>
