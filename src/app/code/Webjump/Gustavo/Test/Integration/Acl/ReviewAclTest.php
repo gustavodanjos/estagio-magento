@@ -37,6 +37,7 @@ class ReviewAclTest extends TestCase
         $this->assertContains('Webjump_Gustavo::webjump', $acl->getResources());
         $this->assertContains('Webjump_Gustavo::review', $acl->getResources());
         $this->assertContains('Webjump_Gustavo::review_export', $acl->getResources());
+        $this->assertContains('Webjump_Gustavo::config', $acl->getResources());
     }
 
     public function testRoleWithoutResourceIsNotAllowed(): void
