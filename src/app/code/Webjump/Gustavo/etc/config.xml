@@ -6,6 +6,12 @@
                 <title>Webjump Gustavo - Home Block</title>
                 <welcome_message>Bloco renderizado na página inicial utilizando a arquitetura de ViewModels do Magento 2.</welcome_message>
             </general>
+            <reviews>
+                <enabled>1</enabled>
+                <title>Avaliações dos clientes</title>
+                <items_per_page>10</items_per_page>
+                <default_sort>created_at_desc</default_sort>
+            </reviews>
         </webjump_gustavo>
     </default>
 </config>
