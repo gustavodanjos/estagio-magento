@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">webjump_gustavo_product_listing.webjump_gustavo_product_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <spinner>webjump_gustavo_product_columns</spinner>
+        <deps>
+            <dep>webjump_gustavo_product_listing.webjump_gustavo_product_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="webjump_gustavo_product_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">entity_id</param>
+                <param name="requestFieldName" xsi:type="string">entity_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>Webjump_Gustavo::review</aclResource>
+        <dataProvider name="webjump_gustavo_product_listing_data_source" class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+            <settings>
+                <requestFieldName>entity_id</requestFieldName>
+                <primaryFieldName>entity_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <filters name="listing_filters"/>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="webjump_gustavo_product_columns">
+        <column name="entity_id" sortOrder="10">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+            </settings>
+        </column>
+        <column name="name" sortOrder="20">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Nome</label>
+            </settings>
+        </column>
+        <column name="sku" sortOrder="30">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">SKU</label>
+            </settings>
+        </column>
+        <actionsColumn name="actions" class="Webjump\Gustavo\Ui\Component\Listing\Column\ProductSelectActions" sortOrder="40">
+            <settings>
+                <indexField>entity_id</indexField>
+                <label translate="true">Ações</label>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>
