@@ -84,6 +84,12 @@
                 <label translate="true">ID do Produto</label>
             </settings>
         </column>
+        <column name="product_name" sortOrder="25">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Produto</label>
+            </settings>
+        </column>
         <column name="author" sortOrder="30">
             <settings>
                 <filter>text</filter>
