@@ -6,7 +6,6 @@ namespace Webjump\Gustavo\Setup\Patch\Data;
 
 use Magento\Catalog\Model\ResourceModel\Category\CollectionFactory as CategoryCollectionFactory;
 use Magento\Framework\App\ResourceConnection;
-use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
 
 class AddSampleReviews implements DataPatchInterface
@@ -31,6 +30,9 @@ class AddSampleReviews implements DataPatchInterface
         }
 
         $productIds = $this->resolveProductIds();
+        if (empty($productIds)) {
+            return;
+        }
         $rows = $this->buildSampleRows($productIds);
 
         $connection->insertMultiple($table, $rows);
@@ -46,9 +48,6 @@ class AddSampleReviews implements DataPatchInterface
         return [];
     }
 
-    /**
-     * @throws LocalizedException
-     */
     private function resolveProductIds(): array
     {
         $categoryCollection = $this->categoryCollectionFactory->create();
@@ -62,11 +61,18 @@ class AddSampleReviews implements DataPatchInterface
             }
         }
 
-        if (!empty(self::FALLBACK_PRODUCT_IDS)) {
-            return self::FALLBACK_PRODUCT_IDS;
-        }
+        return $this->filterExistingProducts(self::FALLBACK_PRODUCT_IDS);
+    }
 
-        throw new LocalizedException(__('No products found to link the sample reviews.'));
+    private function filterExistingProducts(array $productIds): array
+    {
+        $connection = $this->resourceConnection->getConnection();
+        $productTable = $this->resourceConnection->getTableName('catalog_product_entity');
+        $existing = $connection->fetchCol(
+            $connection->select()->from($productTable, 'entity_id')->where('entity_id IN (?)', $productIds)
+        );
+
+        return array_map('intval', $existing);
     }
 
     /**

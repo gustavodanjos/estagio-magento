@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">webjump_gustavo_review_listing.webjump_gustavo_review_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <spinner>webjump_gustavo_review_columns</spinner>
+        <deps>
+            <dep>webjump_gustavo_review_listing.webjump_gustavo_review_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="webjump_gustavo_review_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">review_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>Webjump_Gustavo::review</aclResource>
+        <dataProvider name="webjump_gustavo_review_listing_data_source" class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+            <settings>
+                <requestFieldName>review_id</requestFieldName>
+                <primaryFieldName>review_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filters name="listing_filters"/>
+        <paging name="listing_paging"/>
+        <massaction name="listing_massaction">
+            <settings>
+                <selectProvider>webjump_gustavo_review_listing.webjump_gustavo_review_listing.webjump_gustavo_review_columns.ids</selectProvider>
+                <indexField>review_id</indexField>
+            </settings>
+            <action name="approve">
+                <settings>
+                    <url path="webjump_gustavo/review/massApprove"/>
+                    <type>approve</type>
+                    <label translate="true">Aprovar</label>
+                </settings>
+            </action>
+            <action name="disapprove">
+                <settings>
+                    <url path="webjump_gustavo/review/massDisapprove"/>
+                    <type>disapprove</type>
+                    <label translate="true">Reprovar</label>
+                </settings>
+            </action>
+            <action name="delete">
+                <settings>
+                    <confirm>
+                        <message translate="true">Excluir as avaliações selecionadas?</message>
+                        <title translate="true">Excluir</title>
+                    </confirm>
+                    <url path="webjump_gustavo/review/massDelete"/>
+                    <type>delete</type>
+                    <label translate="true">Excluir</label>
+                </settings>
+            </action>
+        </massaction>
+    </listingToolbar>
+    <columns name="webjump_gustavo_review_columns">
+        <selectionsColumn name="ids" sortOrder="0">
+            <settings>
+                <indexField>review_id</indexField>
+            </settings>
+        </selectionsColumn>
+        <column name="review_id" sortOrder="10">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+            </settings>
+        </column>
+        <column name="product_id" sortOrder="20">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID do Produto</label>
+            </settings>
+        </column>
+        <column name="product_name" sortOrder="25">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Produto</label>
+            </settings>
+        </column>
+        <column name="author" sortOrder="30">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Autor</label>
+            </settings>
+        </column>
+        <column name="comment" sortOrder="40">
+            <settings>
+                <label translate="true">Comentário</label>
+            </settings>
+        </column>
+        <column name="rating" sortOrder="50">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Nota</label>
+            </settings>
+        </column>
+        <column name="is_approved" sortOrder="60" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="Magento\Config\Model\Config\Source\Yesno"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label translate="true">Aprovado</label>
+            </settings>
+        </column>
+        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date" sortOrder="70">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <sorting>desc</sorting>
+                <label translate="true">Criado em</label>
+            </settings>
+        </column>
+        <actionsColumn name="actions" class="Webjump\Gustavo\Ui\Component\Listing\Column\ReviewActions" sortOrder="80">
+            <settings>
+                <indexField>review_id</indexField>
+                <label translate="true">Ações</label>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>
