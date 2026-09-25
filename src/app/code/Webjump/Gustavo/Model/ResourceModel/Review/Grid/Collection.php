@@ -44,6 +44,34 @@ class Collection extends ReviewCollection implements SearchResultInterface
         $this->setMainTable($mainTable);
     }
 
+    protected function _initSelect(): Collection
+    {
+        $this->getSelect()->from(['main_table' => $this->getMainTable()]);
+
+        $this->joinProductName();
+
+        return $this;
+    }
+
+    private function joinProductName(): void
+    {
+        $connection = $this->getConnection();
+        $nameAttributeId = $connection->select()
+            ->from($this->getTable('eav_attribute'), ['attribute_id'])
+            ->where('entity_type_id = (?)', $connection->select()->from($this->getTable('eav_entity_type'), 'entity_type_id')->where('entity_type_code = ?', \Magento\Catalog\Model\Product::ENTITY))
+            ->where('attribute_code = ?', 'name');
+
+        $this->getSelect()->joinLeft(
+            ['product_name' => $this->getTable('catalog_product_entity_varchar')],
+            'product_name.entity_id = main_table.product_id'
+            . ' AND product_name.store_id = 0'
+            . ' AND product_name.attribute_id = (' . $nameAttributeId . ')',
+            ['product_name' => 'value']
+        );
+
+        $this->addFilterToMap('product_name', 'product_name.value');
+    }
+
     public function getAggregations(): ?AggregationInterface
     {
         return $this->aggregations;

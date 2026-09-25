@@ -7,7 +7,7 @@ Neste desafio, a entidade de avaliações criada no 14.2 (`webjump_gustavo_revie
 - **Rota admin própria** (`webjump_gustavo/review/index`) com controller que define `ADMIN_RESOURCE = Webjump_Gustavo::review`;
 - **ACL granular** (`etc/acl.xml`): um recurso para a tela/moderação (`::review`) e outro **separado para exportação** (`::review_export`) — já preparado para o 15.2;
 - **Menu no admin**: `Webjump > Avaliações`;
-- **Grid em UI Component** com filtros por texto, faixa numérica, data e select; ordenação; paginação; bookmarks; três ações em massa (Aprovar, Reprovar, Excluir — com confirmação na destrutiva) e coluna de ações por linha;
+- **Grid em UI Component** com filtros por texto, faixa numérica, data e select; ordenação; paginação; bookmarks; coluna **"Produto"** com o nome vindo de join; três ações em massa (Aprovar, Reprovar, Excluir — com confirmação na destrutiva) e coluna de ações por linha;
 - **Teste de integração automatizado** cobrindo a árvore de ACL (`OK (3 tests, 7 assertions)`).
 
 ---
@@ -34,8 +34,8 @@ Menu "Webjump > Avaliações" (menu.xml, resource = ::review)
                                 │     └─ CollectionFactory resolve -> Grid\Collection (di.xml adminhtml)
                                 │           └─ tabela webjump_gustavo_review
                                 ├─ listingToolbar: bookmark, columnsControls, filters, paging, massaction
-                                └─ columns: ids, review_id, product_id, author, comment,
-                                            rating, is_approved, created_at, actions
+                                └─ columns: ids, review_id, product_id, product_name (join), author,
+                                            comment, rating, is_approved, created_at, actions
 
 Mass actions (controllers MassApprove/MassDisapprove/MassDelete) e ação por linha (Delete)
   └─ recebem os IDs via Filter + CollectionFactory (ou review_id por param), executam
@@ -63,7 +63,7 @@ app/code/Webjump/Gustavo/
 │   ├── MassDisapprove.php         # Reprovar vários de uma vez (is_approved = 0)
 │   └── MassDelete.php             # Excluir vários (ação destrutiva)
 ├── Model/ResourceModel/Review/Grid/
-│   └── Collection.php             # Collection dedicada ao grid (SearchResultInterface)
+│   └── Collection.php             # Collection dedicada ao grid (SearchResultInterface + join do nome do produto)
 ├── Ui/Component/Listing/Column/
 │   └── ReviewActions.php          # Coluna "Ações" (link Excluir + confirmação)
 ├── Test/Integration/Acl/
@@ -101,10 +101,12 @@ O handle segue a convenção `{routerId}_{controller}_{action}`; dentro dele, `<
 **`view/adminhtml/ui_component/webjump_gustavo_review_listing.xml`** — o grid inteiro, descrito em XML.
 - `<dataSource>` declara o provider JS, a URL de atualização (`mui/index/render`) e o `aclResource` (tripla proteção: o endpoint de dados também exige a permissão);
 - `<listingToolbar>` traz bookmark (filtros salvos por usuário), controle de colunas, filtros, paginação e as **três mass actions** — só a `delete` tem `<confirm>`, porque é destrutiva;
-- `<columns>` define cada coluna com seu filtro: `textRange` (ID, produto, nota), `text` (autor), `select` com `Yesno` (aprovado), `dateRange` (criado em) e a coluna de ações. `comment` fica sem filtro de propósito. O `sorting>desc` em `created_at` define a ordenação padrão.
+- `<columns>` define cada coluna com seu filtro: `textRange` (ID, ID do Produto, nota), `text` (Produto — nome vindo do join — e autor), `select` com `Yesno` (aprovado), `dateRange` (criado em) e a coluna de ações. `comment` fica sem filtro de propósito. O `sorting>desc` em `created_at` define a ordenação padrão.
 
 **`Model/ResourceModel/Review/Grid/Collection.php`** — a collection vista pelo grid.
 Estende a collection do 14.2 e **implementa `SearchResultInterface`**, exigência do `DataProvider` do UI Component (sem isso, o grid quebra com `TypeError`). Usa `Document` como model dos itens — padrão idêntico ao `Magento\Cms\...\Page\Grid\Collection`.
+
+Em `_initSelect()`, além do `from` na tabela principal, é feito um `joinLeft` em `catalog_product_entity_varchar` (alias `product_name`) para trazer o **nome do produto** (`value AS product_name`). O join casa `product_name.entity_id = main_table.product_id` com `store_id = 0` (loja default — regra dos grids admin, 1:1 sem multiplicar linhas) e resolve o `attribute_id` do atributo `name` por **subquery** em `eav_entity_type`/`eav_attribute` — sem hard-code de ID, então vale em qualquer instalação. Por fim, `addFilterToMap('product_name', 'product_name.value')` mapeia o campo para o core aplicar o filtro `text` e a ordenação na coluna do join.
 
 **`etc/adminhtml/di.xml`** — o "plug" entre o grid e a collection.
 Registra `webjump_gustavo_review_listing_data_source` no `CollectionFactory` do framework apontando para a `Grid\Collection` — é assim que o DataProvider sabe de onde ler.
@@ -125,8 +127,8 @@ Garante: (1) os três recursos existem na árvore; (2) uma role **sem** o recurs
 ### 1. Menu próprio "Webjump > Avaliações"
 Em vez de pendurar em Marketing/Stores: cria namespace próprio, bate com a hierarquia do ACL e escala com a trilha (selo, avaliações, configuração no 15.2).
 
-### 2. Coluna `product_id` sem join para o nome do produto
-O grid mostra só o ID (com filtro `textRange`). O nome exigiria join na collection do grid — custo e ponto de falha sem critério exigindo. O vínculo legível com o produto fica para o formulário do 15.2.
+### 2. Coluna "Produto" com o nome via join (mantendo `product_id`)
+O grid mostra o **ID do Produto** (filtro `textRange`) e o **nome do produto** (filtro `text`). O nome chega por um `joinLeft` em `catalog_product_entity_varchar` na `Grid\Collection`, olhando a **loja default** (`store_id = 0`) — 1:1, sem multiplicar linhas. O `attribute_id` do atributo `name` é resolvido por subquery em `eav_entity_type`/`eav_attribute`, então não fica hard-coded para a instalação. O custo do join é mínimo e o ganho é legibilidade: o time de atendimento reconhece o produto pelo nome. O `product_id` continua exposto porque é a referência estável para suporte — e a coluna já deixa pronto o caminho para o export (15.2) e o desafio 15.3, que exigem o nome do produto.
 
 ### 3. Três mass actions, mas só Excluir com confirmação
 Aprovar/Reprovar cobrem o fluxo real de moderação (inclusive desfazer). Só a exclusão é destrutiva, então só ela ganha `<confirm>` — como pede o critério.
@@ -153,9 +155,11 @@ O patch do 14.2 quebrava `setup:install` em base limpa (fallback para IDs de pro
 
 ### 2. Grid populado
 
-> **Grid "Avaliações" listando os registros da collection, com todas as colunas (ID, ID do Produto, Autor, Comentário, Nota, Aprovado, Criado em, Ações)**
+> **Grid "Avaliações" listando os registros da collection, com as colunas (ID, ID do Produto, Autor, Comentário, Nota, Aprovado, Criado em, Ações, Produtos)**
 >
-> <img width="1849" height="741" alt="painel-admin" src="https://github.com/user-attachments/assets/5906dc05-c6e7-4626-97ac-63631128205b" />
+>
+> <img width="1775" height="664" alt="Captura de tela de 2026-09-25 02-46-38" src="https://github.com/user-attachments/assets/62f615b4-8920-4d81-b50d-6208a3c3cdfa" />
+
 
 
 ### 3. Filtros funcionando
