@@ -11,6 +11,7 @@ use Magento\Ui\Component\Listing\Columns\Column;
 
 class ReviewActions extends Column
 {
+    private const URL_PATH_EDIT = 'webjump_gustavo/review/edit';
     private const URL_PATH_DELETE = 'webjump_gustavo/review/delete';
 
     public function __construct(
@@ -31,6 +32,13 @@ class ReviewActions extends Column
                     continue;
                 }
                 $item[$this->getData('name')] = [
+                    'edit' => [
+                        'href' => $this->urlBuilder->getUrl(
+                            self::URL_PATH_EDIT,
+                            ['review_id' => $item['review_id']]
+                        ),
+                        'label' => __('Editar'),
+                    ],
                     'delete' => [
                         'href' => $this->urlBuilder->getUrl(
                             self::URL_PATH_DELETE,

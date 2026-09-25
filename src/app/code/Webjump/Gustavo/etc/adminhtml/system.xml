@@ -16,6 +16,25 @@
                     <comment>Texto exibido no bloco da página inicial. Se vazio, o bloco usa o valor padrão.</comment>
                 </field>
             </group>
+            <group id="reviews" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Avaliações</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Habilitar avaliações</label>
+                    <comment>Quando desabilitado, as avaliações não são exibidas na loja.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="title" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Título do bloco na página do produto</label>
+                </field>
+                <field id="items_per_page" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Quantidade máxima de avaliações exibidas</label>
+                    <validate>validate-number validate-greater-than-zero</validate>
+                </field>
+                <field id="default_sort" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Ordenação padrão</label>
+                    <source_model>Webjump\Gustavo\Model\Config\Source\ReviewSort</source_model>
+                </field>
+            </group>
         </section>
     </system>
 </config>

@@ -1,11 +1,8 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
-        <referenceBlock name="page.actions.toolbar">
-            <block class="Webjump\Gustavo\Block\Adminhtml\AddNewReviewButton" name="webjump_gustavo_review_add_button"/>
-        </referenceBlock>
         <referenceContainer name="content">
-            <uiComponent name="webjump_gustavo_review_listing"/>
+            <uiComponent name="webjump_gustavo_review_form"/>
         </referenceContainer>
     </body>
 </page>
