@@ -1,4 +1,4 @@
-# Desafio 15.3 — Exportação do grid de avaliações formatada (Sim/Não, data BR e nome do produto)
+# Desafio 15.3 - A exportação que o cliente realmente queria
 
 ## Resumo
 
@@ -6,7 +6,7 @@ A exportação CSV/Excel XML do grid de avaliações do `Webjump_Gustavo` agora 
 
 - **`Aprovado`** sai **`Sim` / `Não`** (antes saía `No`/`1` cru);
 - **`Criado em`** sai no **formato brasileiro** `dd/mm/aaaa hh:mm` no fuso da loja (antes `2026-09-23 13:46:29` em UTC);
-- Nova coluna **`Produto`** com o nome do produto (o grid não tem essa coluna — decisão do 15.1 — mas o arquivo exportado passa a ter);
+- Nova coluna **`Produto`** com o nome do produto no excel e xml;
 - **Estratégia**: os controladores próprios de export (<15.2>) deixam de herdar os de converter do `Magento_Ui` e passam a montar o arquivo com um **`ReviewRowMapper` próprio**, usando apenas APIs estáveis do core (`Filter` do UI, `Magento\Framework\Convert\Excel`, `SearchResultIterator`, `FileFactory`) — **zero plugins / zero DI global / zero mudança em classes do núcleo**;
 - **Isolada no módulo**: nenhuma classe ou DI do núcleo é modificada, preferida ou interceptada — grid, form, PDP, configuração e o restante das funcionalidades do módulo continuam funcionando normalmente; nada além do export foi tocado.
 
@@ -73,7 +73,7 @@ Intencionalmente **não** alterados: `etc/acl.xml` (recurso `::review_export` j�
 
 **`Model/Export/ReviewRowMapper.php`**
 - Único ponto da formatação, testável de forma isolada e reutilizado pelos dois controllers.
-- `getHeaders()` devolve os rótulos fixos (coluna `Produto` adicionada — o grid em si não a tem).
+- `getHeaders()` devolve os rótulos fixos (coluna `Produto` adicionada).
 - `getRows(SearchResultInterface)` recebe o resultado do data provider **já filtrado** pelo grid e devolve linhas prontas para CSV/Excel:
   - `Aprovado`: `is_approved` é `'1'` → `Sim`, senão `Não` (robusto para `1`, `0`, `'1'`, `'0'` via cast a string);
   - `Criado em`: valor armazenado em UTC convertido para o fuso da loja com `TimeZoneInterface::date()` e formatado `d/m/Y H:i`; `''`/`0000-00-00 00:00:00` viram vazio; qualquer parse falho devolve o valor original (nunca estoura o export);
