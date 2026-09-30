@@ -10,4 +10,13 @@
                 sortOrder="10"
                 disabled="false"/>
     </type>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="webjump_gustavo_review_listing_data_source" xsi:type="string">Webjump\Gustavo\Model\ResourceModel\Review\Grid\Collection</item>
+                <item name="webjump_gustavo_product_listing_data_source" xsi:type="string">Webjump\Gustavo\Model\ResourceModel\Product\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
 </config>
