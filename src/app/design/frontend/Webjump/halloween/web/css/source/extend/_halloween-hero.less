@@ -1,0 +1,157 @@
+.halloween-hero {
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    .halloween-hero__backdrop {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        transform: scale(1.03);
+        transition: transform 8s ease;
+    }
+
+    &:hover .halloween-hero__backdrop {
+        transform: scale(1.06);
+    }
+
+    .halloween-hero__content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        padding: 40px 20px;
+        max-width: 800px;
+    }
+
+    .halloween-hero__title {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 5.6rem;
+        font-weight: 700;
+        color: #F0EDE6;
+        text-shadow: 0 0 30px rgba(216, 75, 32, 0.6), 0 2px 8px rgba(0, 0, 0, 0.9);
+        margin: 0 0 16px;
+        letter-spacing: 2px;
+        line-height: 1.1;
+        animation: heroTitleFadeIn 1.2s ease forwards;
+    }
+
+    .halloween-hero__subtitle {
+        font-size: 1.8rem;
+        color: #D4D4D0;
+        text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
+        margin: 0 0 32px;
+        letter-spacing: 0.5px;
+        animation: heroTitleFadeIn 1.5s ease forwards;
+    }
+
+    .halloween-hero__cta {
+        display: inline-block;
+        padding: 14px 40px;
+        background: #5C0000;
+        border: 2px solid #D84B20;
+        color: #FFFFFF;
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.8rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        text-decoration: none;
+        border-radius: 3px;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 20px rgba(216, 75, 32, 0.3);
+        animation: heroTitleFadeIn 1.8s ease forwards;
+
+        &:hover,
+        &:focus {
+            background: #7A0000;
+            border-color: #FF7043;
+            color: #FFFFFF;
+            box-shadow: 0 0 35px rgba(216, 75, 32, 0.6);
+            transform: translateY(-2px);
+        }
+    }
+
+    &--no-image {
+        min-height: 0;
+        padding: @indent__xl @indent__base;
+        background-color: #141416;
+        background-image: linear-gradient(135deg, #1A1A1E 0%, #0E0E10 100%);
+        border-bottom: 1px solid #26262B;
+    }
+
+    &--image-only {
+        min-height: 320px;
+    }
+}
+
+@keyframes heroTitleFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media all and (min-width: @screen__m) and (max-width: (@screen__l - 1)) {
+    .halloween-hero {
+        min-height: 420px;
+
+        .halloween-hero__title {
+            font-size: 4.4rem;
+        }
+
+        .halloween-hero__subtitle {
+            font-size: 1.6rem;
+        }
+
+        .halloween-hero__cta {
+            padding: 12px 32px;
+            font-size: 1.6rem;
+        }
+    }
+}
+
+@media all and (max-width: (@screen__m - 1)) {
+    .halloween-hero {
+        min-height: 300px;
+
+        .halloween-hero__backdrop {
+            transform: scale(1.08);
+        }
+
+        &:hover .halloween-hero__backdrop {
+            transform: scale(1.1);
+        }
+
+        .halloween-hero__content {
+            padding: @indent__xl @indent__m;
+        }
+
+        .halloween-hero__title {
+            font-size: 3.4rem;
+            letter-spacing: 1px;
+        }
+
+        .halloween-hero__subtitle {
+            font-size: 1.5rem;
+            margin-bottom: @indent__base;
+        }
+
+        .halloween-hero__cta {
+            display: block;
+            padding: 12px 24px;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+        }
+    }
+}
