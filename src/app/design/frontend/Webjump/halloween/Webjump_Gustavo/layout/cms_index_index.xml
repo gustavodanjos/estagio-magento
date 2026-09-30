@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <remove src="Webjump_Gustavo::css/home-block.css"/>
+    </head>
+    <body>
+        <referenceBlock name="webjump.gustavo.home.block" remove="true"/>
+
+        <referenceContainer name="content">
+            <block class="Magento\Framework\View\Element\Template"
+                   name="halloween.hero.banner"
+                   template="Webjump_Gustavo::halloween_hero.phtml"
+                   before="-">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Webjump\Gustavo\ViewModel\Halloween</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>
