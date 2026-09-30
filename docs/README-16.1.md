@@ -66,6 +66,16 @@ app/design/frontend/Webjump/halloween/
 ├── registration.php                       # Registro do tema no ComponentRegistrar
 ├── theme.xml                              # Declaração do tema, título, parent e preview
 ├── README.md                              # Documentação interna do tema
+├── Magento_Checkout/
+│   └── web/
+│       └── css/
+│           └── source/
+│               └── _extend.less           # Minicarrinho: superfície escura e contraste dos textos
+├── Magento_Catalog/
+│   └── web/
+│       └── css/
+│           └── source/
+│               └── _extend.less           # Toolbar: fundo/campos escuros e modo de exibição ativo
 ├── Magento_Theme/
 │   └── layout/
 │       └── default.xml                    # Logo temática, faixa de arte e ordem do copyright
@@ -120,6 +130,7 @@ app/code/Webjump/Gustavo/
 - **`registration.php` / `theme.xml`**: registram `frontend/Webjump/halloween`, com título `Webjump Halloween`, `<parent>Magento/luma</parent>` e `media/preview.jpg` (800x600) para **Content > Design > Configuration**.
 - **`_theme.less`**: contém **apenas** variáveis já existentes na biblioteca, o que mantém o tema herdável sem colisão de escopo.
 - **`_extend.less` + `extend/`**: o blank declara `//@magento_import 'source/_extend.less';` em `styles-m/l.less`; o pré-processador o resolve pela cadeia de fallback. O arquivo virou um **índice** e cada parcial cuida de um domínio e dos **próprios breakpoints**.
+- **`Magento_Checkout/web/css/source/_extend.less` e `Magento_Catalog/web/css/source/_extend.less`**: ajustes pontuais de componentes do core que não têm parciais próprios no tema. Parciais de módulo são compiladas dentro do mesmo `styles-m.css`, **depois** dos `_extend.less` globais, então vencem o Luma em caso de empate de especificidade.
 - **`Magento_Theme/layout/default.xml`**: (1) troca `logo_file` por `images/logo-halloween.png`; (2) injeta `halloween.footer.bg` no `footer-container`, depois de `footer`, para a arte ocupar a largura total; (3) move o `copyright` de volta ao rodapé, abaixo da arte. Ordem resultante: `footer content` → `halloween-footer-bg` → `copyright`.
 - **Módulo `Webjump_Gustavo`**: `system.xml`/`config.xml` (configuração), `ViewModel/Halloween.php` (lê a config, resolve URLs e decide o que renderizar) e os dois templates condicionais.
 - **`cms_index_index.xml` do tema**: um layout do tema com o mesmo handle **substitui integralmente** o do módulo, por isso o bloco legado `home_block` não é mais renderizado na home.
@@ -291,6 +302,24 @@ bin/cli sh -c "mysql -h <host> -u<user> -p<pass> <db> -e \
   \"DELETE FROM core_config_data WHERE path LIKE 'webjump_gustavo/halloween_theme/%'\""
 ```
 
+### 6. Minicarrinho branco sobre cabeçalho escuro
+
+- **Sintoma:** ao abrir o minicarrinho, o painel aparecia com fundo branco e setas brancas, ilegível sobre o header escuro. Os textos ficavam legíveis apenas porque o Luma já os pinta de escuro.
+- **Causa:** `.minicart-wrapper .block-minicart` define `background: #fff` e bordas claras, e as setas usam `border-color: @color-white`.
+- **Correção:** `Magento_Checkout/web/css/source/_extend.less` redefine a superfície com `@panel__background-color` e `@border-color__base`, troca as setas para a cor do painel, remove o `box-shadow` padrão e ajusta a cor do fechar, das divisórias e do nome do produto.
+
+### 7. Toolbar do catálogo com campos claros e texto claro
+
+- **Sintoma:** `#sorter`, o rótulo "Sort By" e a contagem de produtos apareciam em cinza claro (`#D4D4D0`) sobre um campo cinza claro (`#F0F0F0`).
+- **Causa:** o Luma usa `@toolbar-element-background: @color-gray94` junto de `@toolbar-element__color: @color-gray37`, combinação só legível na paleta original.
+- **Correção:** `Magento_Catalog/web/css/source/_extend.less` redefine as duas variáveis para `@form-element-input__background` e `@text__color`, remove o `box-shadow` do `select` e usa o prefixo `body` em `.modes-mode.active` porque o `styles-l.css` é carregado **depois** do `styles-m.css` no desktop e o Luma ainda declara `.modes-mode.active` com `color: @color-gray37`.
+
+### 8. Card "salta" e a página rola ao passar o mouse no grid
+
+- **Sintoma:** ao pairar o mouse sobre um produto, a página ganhava uma barra de rolagem e os cards abaixo se deslocavam.
+- **Causa:** a partir de 640px o Luma aplica `margin: -10px` e `padding: 9px` em `.products-grid .product-item-info:hover`, o que altera a caixa do card em 20px e, com `overflow-x: hidden` no grid, desloca o documento inteiro.
+- **Correção:** o parcial `extend/_product-cards.less` usa `margin: 0` e mantém o `padding: 12px` já declarado na regra base, de modo que a geometria do card é idêntica no hover. Todos os seletores do parcial foram prefixados com `body` para vencer o Luma sem analisar cada par de especificidade.
+
 ---
 
 ## Evidências
@@ -339,10 +368,15 @@ Home, listagem de produtos, página de produto e rodapé com o fundo escuro, os 
 
 - **Listagem de produtos (PLP)**
 
-> <img width="1908" height="893" alt="coleção" src="https://github.com/user-attachments/assets/6ca595cf-0e12-4c21-8162-0a412e218ffa" />
+> <img width="1832" height="886" alt="image" src="https://github.com/user-attachments/assets/ccdaecb0-1640-47a6-bb6a-278a61373995" />
 >
-> <img width="1908" height="893" alt="coleção2" src="https://github.com/user-attachments/assets/0974f391-0c3b-47c6-9976-031d2b29a73c" />
+> <img width="1832" height="886" alt="image" src="https://github.com/user-attachments/assets/4af8a426-20d6-4368-8aa5-e348b51b8c43" />
 
+- **Minicarrinho**
+> <img width="343" height="339" alt="image" src="https://github.com/user-attachments/assets/7cae667a-c306-4486-8396-1bb6c376e856" />
+
+- **Carrinho**
+> <img width="1588" height="884" alt="image" src="https://github.com/user-attachments/assets/915a3c6a-4df0-44a8-ac4a-73b7773f3361" />
 
 - **Página de produto (PDP)**
 
@@ -364,21 +398,8 @@ O trabalho toca somente o tema, o módulo do projeto e a documentação:
 git status --short
 ```
 
-```text
- M .gitignore
- M src/app/code/Webjump/Gustavo/etc/adminhtml/di.xml
- M src/app/code/Webjump/Gustavo/etc/adminhtml/system.xml
- M src/app/code/Webjump/Gustavo/etc/config.xml
- M src/app/code/Webjump/Gustavo/etc/di.xml
-?? docs/README-16.1.md
-?? src/app/code/Webjump/Gustavo/Model/Config/Source/CategoryCollection.php
-?? src/app/code/Webjump/Gustavo/ViewModel/Halloween.php
-?? src/app/code/Webjump/Gustavo/view/frontend/templates/halloween_footer_bg.phtml
-?? src/app/code/Webjump/Gustavo/view/frontend/templates/halloween_hero.phtml
-?? src/app/design/
-```
-
 > <img width="1077" height="389" alt="image" src="https://github.com/user-attachments/assets/961602b1-1e70-47f2-a2c0-f09f49befd3f" />
+> <img width="1188" height="259" alt="image" src="https://github.com/user-attachments/assets/1a80035d-a199-4fbf-839d-e4165c6fe626" />
 
 
 Nenhuma linha aponta para `src/vendor/`, `src/lib/` ou `src/app/design/frontend/Magento/`. Como `vendor/` costuma estar no `.gitignore`, a conferência complementar compara a data dos arquivos do Luma com a do `theme.xml` do tema:
