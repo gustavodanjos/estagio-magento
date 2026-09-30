@@ -12,6 +12,20 @@
                 <items_per_page>10</items_per_page>
                 <default_sort>created_at_desc</default_sort>
             </reviews>
+            <halloween_theme>
+                <hero_enabled>1</hero_enabled>
+                <hero_show_image>1</hero_show_image>
+                <hero_opacity>0.85</hero_opacity>
+                <hero_show_text>1</hero_show_text>
+                <hero_title>Noite Assombrada</hero_title>
+                <hero_subtitle>A coleção mais aterrorizante do ano chegou</hero_subtitle>
+                <hero_show_button>1</hero_show_button>
+                <hero_button_text>Ver Coleção</hero_button_text>
+                <hero_button_collection/>
+                <hero_button_link>/catalogsearch/result/?q=halloween</hero_button_link>
+                <footer_show_image>1</footer_show_image>
+                <footer_opacity>0.35</footer_opacity>
+            </halloween_theme>
         </webjump_gustavo>
     </default>
 </config>

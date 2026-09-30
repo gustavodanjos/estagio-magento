@@ -35,6 +35,81 @@
                     <source_model>Webjump\Gustavo\Model\Config\Source\ReviewSort</source_model>
                 </field>
             </group>
+            <group id="halloween_theme" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Tema Halloween</label>
+                <comment>Configurações visuais do tema Noite Assombrada.</comment>
+                <field id="hero_enabled" translate="label comment" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Exibir o Hero Banner</label>
+                    <comment>Quando desabilitado, o banner não é renderizado na página inicial e todo o restante das opções do banner é ignorado.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="hero_show_image" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Exibir a Imagem do Hero Banner</label>
+                    <comment>Desmarque para exibir o banner somente com texto, sobre o fundo escuro do tema.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="hero_image" translate="label comment" type="image" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Hero Banner (Imagem)</label>
+                    <comment>Imagem exibida como hero banner na página inicial. Recomendado: 1920x600px.</comment>
+                    <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                    <upload_dir config="system/filesystem/media" scope_info="1">webjump/halloween/hero</upload_dir>
+                    <base_url type="media" scope_info="1">webjump/halloween/hero</base_url>
+                </field>
+                <field id="hero_opacity" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Hero Banner (Opacidade)</label>
+                    <comment>Opacidade da imagem do hero entre 0 (transparente) e 1 (opaco). Ex: 0.85</comment>
+                    <validate>validate-number validate-zero-or-greater</validate>
+                </field>
+                <field id="hero_show_text" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Exibir o Texto do Hero Banner</label>
+                    <comment>Desmarque para exibir apenas a imagem, sem título e sem subtítulo.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="hero_title" translate="label comment" type="text" sortOrder="45" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Hero Banner (Título)</label>
+                    <comment>Título principal do banner. Deixe vazio para não exibir.</comment>
+                </field>
+                <field id="hero_subtitle" translate="label comment" type="textarea" sortOrder="48" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Hero Banner (Subtítulo)</label>
+                    <comment>Texto de apoio abaixo do título. Deixe vazio para não exibir.</comment>
+                </field>
+                <field id="hero_show_button" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Exibir o Botão do Hero Banner</label>
+                    <comment>Desmarque para remover o botão de chamada para ação do banner.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="hero_button_text" translate="label comment" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Hero Banner (Texto do Botão)</label>
+                    <comment>Texto do botão. Deixe vazio para não exibir o rótulo.</comment>
+                </field>
+                <field id="hero_button_collection" translate="label comment" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Hero Banner (Coleção de Destino do Botão)</label>
+                    <comment>Escolha uma coleção já cadastrada na loja. Tem prioridade sobre o link informado abaixo, evitando digitação e links quebrados.</comment>
+                    <source_model>Webjump\Gustavo\Model\Config\Source\CategoryCollection</source_model>
+                </field>
+                <field id="hero_button_link" translate="label comment" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Hero Banner (Link Manual do Botão)</label>
+                    <comment>Usado apenas quando nenhuma coleção é selecionada no campo acima. Use URLs relativas (ex: /catalogsearch/result/?q=halloween) ou absolutas.</comment>
+                </field>
+                <field id="footer_show_image" translate="label comment" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Exibir a Imagem de Fundo do Rodapé</label>
+                    <comment>Quando desabilitado, o rodapé volta a exibir apenas a cor sólida do tema, sem imagem de fundo.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="footer_image" translate="label comment" type="image" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Footer (Imagem de Fundo)</label>
+                    <comment>Imagem de fundo do rodapé. Recomendado: banda horizontal larga, ex: 1920x400px. Ela é preenchida preservando a proporção e ancorada na base do rodapé, portanto não é distorcida nem cortada.</comment>
+                    <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                    <upload_dir config="system/filesystem/media" scope_info="1">webjump/halloween/footer</upload_dir>
+                    <base_url type="media" scope_info="1">webjump/halloween/footer</base_url>
+                </field>
+                <field id="footer_opacity" translate="label comment" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Footer (Opacidade da Imagem)</label>
+                    <comment>Opacidade da imagem de fundo do footer entre 0 e 1. Ex: 0.35</comment>
+                    <validate>validate-number validate-zero-or-greater</validate>
+                </field>
+            </group>
         </section>
     </system>
 </config>
+
