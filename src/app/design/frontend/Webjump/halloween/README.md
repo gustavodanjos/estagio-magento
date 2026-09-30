@@ -8,7 +8,11 @@ A documentação completa do desafio (arquitetura, configuração pelo Admin, pr
 
 - `web/css/source/_theme.less`: **apenas** variáveis da Magento UI Library (tabela abaixo);
 - `web/css/source/_extend.less`: índice que importa os parciais de `web/css/source/extend/` (fontes, tipografia, header, cards, PDP, botões, rodapé, breadcrumbs e hero);
+- `Magento_Checkout/web/css/source/_extend.less`: superfície escura e contraste dos textos do minicarrinho;
+- `Magento_Catalog/web/css/source/_extend.less`: fundo e cores da toolbar do catálogo;
 - `web/fonts/cormorant-garamond-bold.woff2`: fonte local carregada com `@font-face` e `@{baseDir}`.
+
+Os dois `_extend.less` de módulo existem porque `Magento_Checkout` e `Magento_Catalog` não têm parciais próprios no tema. Como parciais de módulo são compiladas depois de `web/css/source/_extend.less` dentro do mesmo `styles-m.css`, elas vencem o Luma em empate de especificidade. Já as regras que precisam ganhar do Luma carregado no `styles-l.css` (desktop) recebem o prefixo `body`, como em `body .modes-mode.active`.
 
 ## Variáveis da Biblioteca Sobrescritas e Justificativa
 
