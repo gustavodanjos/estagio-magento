@@ -1,0 +1,41 @@
+& when (@media-common = true) {
+
+    .minicart-wrapper {
+        .block-minicart {
+            background: @panel__background-color;
+            border-color: @border-color__base;
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.7);
+
+            &:before {
+                border-color: transparent transparent @panel__background-color transparent;
+            }
+
+            &:after {
+                border-color: transparent transparent @border-color__base transparent;
+            }
+        }
+
+        .action.close {
+            color: @minicart-icons-color;
+
+            &:hover,
+            &:active {
+                color: @minicart-icons-color-hover;
+            }
+        }
+    }
+
+    .minicart-items-wrapper,
+    .minicart-items .product-item:not(:first-child) {
+        border-color: @border-color__base;
+    }
+
+    .minicart-items .product-item-name a {
+        color: @heading__color__base;
+
+        &:hover,
+        &:focus {
+            color: @link__hover__color;
+        }
+    }
+}
