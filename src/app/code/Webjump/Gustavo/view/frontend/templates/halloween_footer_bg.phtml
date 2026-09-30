@@ -1,0 +1,20 @@
+<?php
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Webjump\Gustavo\ViewModel\Halloween $viewModel
+ */
+$viewModel = $block->getData('view_model');
+if (!$viewModel instanceof \Webjump\Gustavo\ViewModel\Halloween) {
+    return;
+}
+
+$footerImageUrl = $viewModel->getFooterImageUrl();
+if ($footerImageUrl === '') {
+    return;
+}
+?>
+<div class="halloween-footer-bg"
+     aria-hidden="true"
+     style="background-image: url('<?= $escaper->escapeUrl($footerImageUrl) ?>'); opacity: <?= $escaper->escapeHtmlAttr((string)$viewModel->getFooterOpacity()) ?>;">
+</div>
