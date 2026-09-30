@@ -1,0 +1,49 @@
+.page-header {
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    background-color: rgba(14, 14, 16, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(216, 75, 32, 0.2);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.7);
+    transition: background-color 0.3s ease;
+
+    .panel.wrapper {
+        background-color: rgba(10, 10, 12, 0.6);
+        border-bottom: 1px solid rgba(38, 38, 43, 0.6);
+    }
+
+    &:hover {
+        background-color: rgba(14, 14, 16, 0.97);
+    }
+}
+
+.nav-sections {
+    background: rgba(20, 20, 22, 0.9);
+    border-bottom: 1px solid rgba(38, 38, 43, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.navigation {
+    background: transparent;
+
+    .level0 {
+        > .level-top {
+            color: #D4D4D0;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+
+            &:hover,
+            &.ui-state-focus {
+                color: #D84B20;
+            }
+        }
+
+        &.active > .level-top {
+            color: #D84B20;
+            border-color: #D84B20;
+        }
+    }
+}
