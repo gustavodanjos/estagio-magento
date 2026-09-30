@@ -116,9 +116,6 @@ class Halloween implements ArgumentInterface
         return $this->getStoreValue(self::XML_PATH_HERO_BUTTON_TEXT);
     }
 
-    /**
-     * Coleção selecionada no admin tem prioridade sobre o link digitado à mão.
-     */
     public function getHeroButtonUrl(): string
     {
         if ($this->heroButtonUrl !== null) {
@@ -208,10 +205,6 @@ class Halloween implements ArgumentInterface
         return $this->storeManager->getStore()->getBaseUrl(UrlInterface::URL_TYPE_MEDIA) . $path;
     }
 
-    /**
-     * Imagem padrão do tema. Só é publicada se o arquivo existir de fato, para
-     * que um arquivo renomeado no tema não vire uma requisição 404 silenciosa.
-     */
     private function buildThemeImageUrl(string $path): string
     {
         if (!$this->fileDriver->isExists($this->themeWebDirectory() . '/' . $path)) {
