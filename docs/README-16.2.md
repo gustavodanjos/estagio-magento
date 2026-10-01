@@ -2,7 +2,7 @@
 
 ## Resumo
 
-* [ ] 
+Implementação da faixa global da campanha "Noite Assombrada" no tema `Webjump/halloween`, com movimentação/remoção de blocos via Layout XML, sobrescrita de template da busca, tradução de vocabulário para en_US com termos gótico-vitorianos e personalização dos e-mails de novo pedido (cliente cadastrado e visitante), com identidade visual dark e suporte ao Mailcatcher.
 
 ---
 
@@ -68,7 +68,7 @@ app/design/frontend/Webjump/halloween/
 ## Explicação de cada componente
 
 **`Magento_Theme/layout/default.xml`**
-Adiciona a faixa `halloween.campaign.bar` no container `page.top` para aparecer antes de todo o conteúdo da página. Remove os blocos de comparar produtos (`catalog.compare.sidebar`) e o de copyright (`copyright`) via remoção global. Move a busca (`top.search`) de `header-wrapper` para `header.panel`.
+Adiciona a faixa `halloween.campaign.bar` no container `page.top` para aparecer antes de todo o conteúdo da página. Remove o bloco de comparar produtos (`catalog.compare.sidebar`) via remoção global, e move a busca (`top.search`) de `header-wrapper` para `header.panel`. A configuração de footer manteve-se intacta.
 
 **`Magento_Theme/templates/html/halloween-campaign-bar.phtml` e Estilos**
 Template criado com os devidos escapes (`escapeHtmlAttr`, `escapeUrl`) e textos internacionalizados via `__()`. A url de busca aponta para `catalogsearch/result/?q=halloween`. Estilos em `web/css/source/extend/_campaign-bar.less` garantem o gradiente dark da campanha, bordas carmesim, fonte Cormorant Garamond e legibilidade em todos os breakpoints. A faixa é injetada pelo Layout XML, não apenas via CSS.
@@ -87,27 +87,21 @@ Cópia integral dos originais (`order_new.html` e `order_new_guest.html`). Os ar
 ## Decisões de implementação e justificativas
 
 ### 1. Faixa de campanha inserida via Layout XML
-
 Injetar a faixa pelo Layout (`default.xml` no container `page.top`) garante que ela se torne um bloco oficial do Magento, facilitando o gerenciamento por cache, permitindo que outros módulos interajam com ela e garantindo que o elemento seja renderizado no server-side, o que é uma boa prática comparada à manipulação por JS/CSS.
 
 ### 2. Sobrescrita integral do template de busca
-
 Sobrescrever o template `form.mini.phtml` inteiro garante flexibilidade total para modificar classes (`halloween-search`) e os atributos sem depender de JS, prevenindo FOUC (piscar na tela) e assegurando atributos corretos (como o `aria-label` traduzível).
 
 ### 3. Tradução do vocabulário via i18n
-
 A alteração dos termos da loja (como "Sign In" para "Entrar no Covil") foi feita através do dicionário `en_US.csv`. Essa abordagem aproveita a arquitetura nativa do Magento, o que mantém os templates limpos, suporta escalabilidade e facilita a manutenção.
 
 ### 4. Customização de e-mails usando fallback nativo
-
 A estilização dark foi injetada aproveitando as variáveis e arquivos LESS específicos para e-mail (`_email-variables.less` e `_email-extend.less`). Além disso, os templates principais mantêm a base de estrutura do Luma original para garantir a compatibilidade e a estabilidade estrutural do e-mail ao renderizar nos clientes de e-mail.
 
-### 5. Remoção dos blocos Compare Products e Copyright
-
-O bloco `catalog.compare.sidebar` foi removido via Layout XML porque a campanha "Noite Assombrada" tem foco em imergir o usuário na identidade visual temática e direcioná-lo diretamente para a conversão emocional da coleção. Oferecer uma funcionalidade de comparação analítica foge do engajamento proposto pela campanha. Além disso, o bloco `copyright` foi removido para cravar o footer temático como a borda absoluta do final da página, intensificando a imersão visual.
+### 5. Remoção do bloco Compare Products
+O bloco `catalog.compare.sidebar` foi removido via Layout XML porque a campanha "Noite Assombrada" tem foco em imergir o usuário na identidade visual temática e direcioná-lo diretamente para a conversão emocional da coleção ("Adquirir no Caldeirão"). Oferecer uma funcionalidade de comparação analítica, lado a lado, sobre especificações técnicas foge do engajamento e do mistério propostos pela campanha.
 
 ### 6. Movimentação da Barra de Busca
-
 A barra de busca (`top.search`) foi movida do container `header-wrapper` para o `header.panel` (o painel superior) através do Layout XML. Essa alteração limpa a área principal do cabeçalho, proporcionando mais destaque e respiro visual ao logo temático e ao minicarrinho. Ao mesmo tempo, ela posiciona a funcionalidade de busca em uma zona de alto contraste junto aos links de utilidade, acompanhando a estética minimalista e focada do tema dark.
 
 ---
@@ -118,21 +112,27 @@ A barra de busca (`top.search`) foi movida do container `header-wrapper` para o 
 
 > **Home**
 >
-> <img width="1440" height="1100" alt="16 2-01-campaign-bar-home" src="https://github.com/user-attachments/assets/1ee32d2b-f8b5-496b-8216-884434b7217c" />
+> <img width="1919" height="956" alt="image" src="https://github.com/user-attachments/assets/d7313685-7e01-44e7-8be9-fa6a2bb3f0b4" />
 >
 > **PLP**
 >
-> <img width="1440" height="1100" alt="16 2-02-campaign-bar-plp" src="https://github.com/user-attachments/assets/9919295b-32af-4b74-a0f5-c2ec26fb91bc" />
+> <img width="1919" height="956" alt="image" src="https://github.com/user-attachments/assets/ae2c7a5c-84a5-4e12-b2b1-38d76bd42cbc" />
 >
 > **PDP**
 >
-> <img width="1440" height="1100" alt="16 2-03-campaign-bar-pdp" src="https://github.com/user-attachments/assets/de71c1a7-2496-45e2-a006-d74da26d57b7" />
+> <img width="1919" height="956" alt="image" src="https://github.com/user-attachments/assets/1d1570d8-a0c0-43d9-9b88-c094a41d14ec" />
 
 ### 2. Termos traduzidos
 
 > **Exemplo: Entrar no Covil**
 >
-> <img width="1440" height="1000" alt="16 2-04-i18n-login" src="https://github.com/user-attachments/assets/345a0a90-aa3d-4496-80a4-54342e9f9c3e" />
+> <img width="1919" height="956" alt="image" src="https://github.com/user-attachments/assets/24db6548-13d1-4505-9991-898c957cf68a" />
+>
+> <img width="1919" height="956" alt="image" src="https://github.com/user-attachments/assets/2b8a265c-d8a1-4c21-966b-7f919fdf2042" />
+>
+> <img width="243" height="434" alt="image" src="https://github.com/user-attachments/assets/e3dd262f-e2df-4de9-8e42-179065bc3f65" />
+
+
 
 ### 3. E-mail de novo pedido
 
@@ -148,9 +148,9 @@ A barra de busca (`top.search`) foi movida do container `header-wrapper` para o 
 
 ## CRITÉRIO DE ACEITE
 
-- [X] A faixa aparece em todas as páginas e veio do layout, não de CSS
-- [X] Um bloco foi removido pelo layout e outro foi movido de lugar
-- [X] O template sobrescrito está no caminho correto do tema e foi copiado inteiro
-- [X] Os termos traduzidos aparecem na loja
-- [X] O e-mail de novo pedido chega com a identidade da campanha (print do Mailcatcher)
-- [X] Tudo escapado e dentro de `__()` nos templates que eu escrevi
+- [x] A faixa aparece em todas as páginas e veio do layout, não de CSS
+- [x] Um bloco foi removido pelo layout e outro foi movido de lugar
+- [x] O template sobrescrito está no caminho correto do tema e foi copiado inteiro
+- [x] Os termos traduzidos aparecem na loja
+- [x] O e-mail de novo pedido chega com a identidade da campanha (print do Mailcatcher)
+- [x] Tudo escapado e dentro de `__()` nos templates que eu escrevi
