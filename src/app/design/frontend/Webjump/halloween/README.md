@@ -13,7 +13,7 @@ Tema customizado de Halloween para Magento 2, com herança direta de `Magento/lu
 
 ## Campanha Noite Assombrada
 
-- `Magento_Theme/layout/default.xml`: faixa `halloween.campaign.bar` em `page.top`, remoção de `catalog.compare.sidebar` e `copyright`, e `top.search` movido para `header.panel`;
+- `Magento_Theme/layout/default.xml`: faixa `halloween.campaign.bar` em `page.top`, remoção de `catalog.compare.sidebar` e `top.search` movido para `header.panel`;
 - `Magento_Theme/templates/html/halloween-campaign-bar.phtml`: markup da faixa, único ponto do tema que poderia quebrar o cabeçalho do Luma;
 - `web/css/source/extend/_campaign-bar.less`: estilo responsivo da faixa;
 - `Magento_Search/templates/form.mini.phtml`: cópia integral do original com a marcação da busca ajustada;
