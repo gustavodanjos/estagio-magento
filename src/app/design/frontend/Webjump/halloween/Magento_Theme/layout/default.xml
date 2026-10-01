@@ -34,9 +34,7 @@
               destination="header.panel"
               after="-"/>
 
-        <move element="copyright"
-              destination="footer-container"
-              after="halloween.footer.bg"/>
+        <referenceBlock name="copyright" remove="true"/>
 
     </body>
 </page>
