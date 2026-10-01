@@ -7,7 +7,7 @@ A documentação completa do desafio (arquitetura, configuração pelo Admin, pr
 ## Organização
 
 - `web/css/source/_theme.less`: **apenas** variáveis da Magento UI Library (tabela abaixo);
-- `web/css/source/_extend.less`: índice que importa os parciais de `web/css/source/extend/` (fontes, tipografia, header, cards, PDP, botões, rodapé, breadcrumbs e hero);
+- `web/css/source/_extend.less`: índice que importa os parciais de `web/css/source/extend/` (fontes, tipografia, header, cards, PDP, botões, rodapé, breadcrumbs, hero e efeitos de Halloween);
 - `Magento_Checkout/web/css/source/_extend.less`: superfície escura e contraste dos textos do minicarrinho;
 - `Magento_Catalog/web/css/source/_extend.less`: fundo e cores da toolbar do catálogo;
 - `web/fonts/cormorant-garamond-bold.woff2`: fonte local carregada com `@font-face` e `@{baseDir}`.
@@ -77,3 +77,48 @@ Os dois `_extend.less` de módulo existem porque `Magento_Checkout` e `Magento_C
 | `@form-element-input-placeholder__color` | `#6E6E73`                                   | Placeholder discreto, distinguível do texto digitado.                                                                                                                |
 | `@price-color` / `@product-info-price` | `#D84B20`                                   | Preços dos produtos na listagem (catálogo) e na página interna de produto em destaque laranja.                                                                     |
 | `@product-price__muted__color`           | `#8E8E93`                                   | Preço secundário (por exemplo, o preço antigo) em cinza médio, sem competir com o preço em laranja.                                                                 |
+
+## Efeitos Visuais Interativos (Halloween FX)
+
+Efeitos de personalidade adicionados ao tema por `web/js/halloween-fx/` e `web/css/source/extend/_halloween-fx.less`. Só o que é entrada única e barata roda no mobile; o resto fica em `min-width: @screen__m` (768px). `prefers-reduced-motion: reduce` desliga os morcegos e o glow do loader.
+
+| Efeito | Arquivo(s) | Abordagem | Mobile | reduced-motion |
+|---|---|---|---|---|
+| 🧹 **Cursor vassoura** | `_halloween-fx.less` + `cursor-broom.svg` + `cursor-broom2.svg` | CSS puro (`cursor: url(...)`), troca para a vassoura laranja no `:active` via regra universal `body:active *`; `!important` para vencer os seletores específicos do Luma; `body::after` pré-carrega o SVG ativo para não piscar no primeiro clique | Não exibido em < 768px | Sem animação, inalterado |
+| 🕸️ **Teia no canto** | `_halloween-fx.less` + `web-corner.svg` | CSS puro no `body::before`: sem nó no DOM e sem JS, `position: fixed` no canto superior esquerdo, `pointer-events: none`, `z-index: 250` | Não exibido em < 768px | Estática, inalterada |
+| 🎃 **Loader abóbora** | `_halloween-fx.less` + `loader-pumpkin.svg` | CSS: `::before` com o SVG como `background-image` + `@keyframes pumpkin-glow`; loader centralizado com flex | CSS pronto, sem gatilho | Glow desligado |
+| 🦇 **Morcegos de entrada** | `halloween-fx/bats.js` + `_halloween-fx.less` | 5 SVGs inline cruzam a tela em ~900ms e são removidos do DOM; não intercepta clique, não bloqueia hover | Ativo (900ms, sem listener) | Não injetado |
+
+> O CSS do loader está pronto e correto (64×64, `contain`, `pumpkin-glow`), mas a loja não exibe a máscara: `.loading-mask` só é renderizado pelo bloco `main_css_preloader`, condicionado a `dev/css/use_css_critical_path` (desligado), e o `mage/loader` que criava a máscara por AJAX não é mais disparado por nenhum componente no Magento 2.4.
+
+### Arquitetura de carregamento
+
+Os efeitos vivem em módulos RequireJS que `init.js` orquestra. O `requirejs-config.js` do tema mapeia o path e empurra o entry point como dependência bootstrap, sem `data-mage-init` em nenhum template:
+
+```js
+// requirejs-config.js
+var config = {
+    paths: {
+        'halloween-fx': 'js/halloween-fx'
+    },
+    deps: [
+        'halloween-fx/init'
+    ]
+};
+```
+
+Sem o `paths`, o RequireJS resolve `halloween-fx` para `<baseUrl>/halloween-fx.js` e recebe HTTP 404 (MIME `text/plain`), o que aborta o módulo inteiro com `Uncaught Error: Script error for "halloween-fx"`. O arquivo real vive em `web/js/halloween-fx/`.
+
+`init.js` decide o que roda: `desktop` (`min-width: 768px`), `motion` (`prefers-reduced-motion`) e `transactional` (os morcegos não tocam `/checkout` nem `/customer`), e repassa essas decisões a `bats.js`. A teia e o cursor são CSS puro e não passam pelo `init.js`; os morcegos nascem sem emoji, já que a renderização de emoji depende de fonte (`Noto Color Emoji`) que não é garantida.
+
+### Assets e proporção das artes
+
+A teia é arquivo estático em `web/images/`, e não SVG inline no JS: são 140KB de path data, que no JS custariam bundle e cache a cada tema sem ganho nenhum.
+
+O `viewBox` do arquivo é o recorte da arte real, medido no canvas (alpha > 8) e não o do documento do Illustrator. Sem esse recorte a caixa fica com metade do espaço vazio:
+
+| Arquivo | `viewBox` original | `viewBox` em uso | Proporção |
+|---|---|---|---|
+| `web-corner.svg` | `0 0 450 450` | `0 0 450 357` | 1.26 |
+
+A caixa do CSS (`@halloween-web__width/height`) segue essa proporção.
