@@ -1,0 +1,150 @@
+@cursor__image: ~"@{baseDir}images/cursor-broom.svg";
+@cursor__image-active: ~"@{baseDir}images/cursor-broom2.svg";
+@cursor__hotspot: 4 4;
+
+@media all and (min-width: @screen__m) {
+    body {
+        cursor: url("@{cursor__image}") @cursor__hotspot, auto !important;
+    }
+
+    a,
+    button,
+    .action,
+    [role="button"],
+    label,
+    select,
+    input[type="submit"],
+    input[type="button"],
+    .filter-options-title {
+        cursor: url("@{cursor__image}") @cursor__hotspot, pointer !important;
+    }
+
+    body::after {
+        content: '';
+        position: absolute;
+        left: -9999px;
+        top: -9999px;
+        width: 1px;
+        height: 1px;
+        background: url("@{cursor__image-active}") no-repeat;
+    }
+
+    body:active,
+    body:active *:not(input):not(textarea):not(select) {
+        cursor: url("@{cursor__image-active}") @cursor__hotspot, pointer !important;
+    }
+}
+@halloween-bat__duration: 900ms;
+@halloween-z__web: 250;
+@halloween-web__width: 320px;
+@halloween-web__height: 254px;
+
+body::before {
+    content: '';
+    display: none;
+
+    @media all and (min-width: @screen__m) {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: @halloween-z__web;
+        width: @halloween-web__width;
+        height: @halloween-web__height;
+        background: url('@{baseDir}images/web-corner.svg') no-repeat top left / 100% 100%;
+        opacity: 0.45;
+        pointer-events: none;
+    }
+}
+
+
+.loading-mask {
+    background: rgba(10, 10, 12, 0.85);
+    z-index: 9000;
+
+    .loader {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        > img {
+            display: none;
+        }
+
+        > p {
+            margin: 14px 0 0;
+            color: @text__color__muted;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        &::before {
+            content: '';
+            display: block;
+            width: 64px;
+            height: 64px;
+            background: url('@{baseDir}images/loader-pumpkin.svg') no-repeat center / contain;
+            animation: pumpkin-glow 1.4s ease-in-out infinite alternate;
+        }
+    }
+}
+
+@keyframes pumpkin-glow {
+    from {
+        filter: drop-shadow(0 0 6px #D84B20) drop-shadow(0 0 2px #FF7043);
+        transform: scale(1);
+    }
+
+    to {
+        filter: drop-shadow(0 0 18px #D84B20) drop-shadow(0 0 8px #FF7043);
+        transform: scale(1.08);
+    }
+}
+
+.halloween-bats {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.halloween-bat {
+    position: absolute;
+    top: var(--top);
+    left: 0;
+    color: #D4D4D0;
+    opacity: 0;
+    animation: bat-fly @halloween-bat__duration cubic-bezier(0.4, 0, 0.6, 1) var(--delay) forwards;
+}
+
+@keyframes bat-fly {
+    0% {
+        opacity: 0;
+        transform: translate(-12vw, 0) scale(var(--scale));
+    }
+
+    15% { opacity: 1; }
+
+    50% {
+        opacity: 1;
+        transform: translate(calc(var(--travel) / 2), -6vh) scale(calc(var(--scale) * 1.1));
+    }
+
+    85% { opacity: 1; }
+
+    100% {
+        opacity: 0;
+        transform: translate(var(--travel), -14vh) scale(var(--scale));
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .loading-mask .loader::before {
+        animation: none;
+    }
+}
