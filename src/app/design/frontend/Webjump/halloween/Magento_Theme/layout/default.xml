@@ -10,6 +10,15 @@
             </arguments>
         </referenceBlock>
 
+        <referenceBlock name="catalog.compare.sidebar" remove="true"/>
+
+        <referenceContainer name="page.top">
+            <block class="Magento\Framework\View\Element\Template"
+                   name="halloween.campaign.bar"
+                   template="Magento_Theme::html/halloween-campaign-bar.phtml"
+                   before="-"/>
+        </referenceContainer>
+
         <referenceContainer name="footer-container">
             <block class="Magento\Framework\View\Element\Template"
                    name="halloween.footer.bg"
@@ -20,6 +29,10 @@
                 </arguments>
             </block>
         </referenceContainer>
+
+        <move element="top.search"
+              destination="header.panel"
+              after="-"/>
 
         <move element="copyright"
               destination="footer-container"
