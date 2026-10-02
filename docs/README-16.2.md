@@ -112,7 +112,7 @@ A barra de busca (`top.search`) foi movida do container `header-wrapper` para o 
 
 > **Home**
 >
-> <img width="1919" height="956" alt="image" src="https://github.com/user-attachments/assets/d7313685-7e01-44e7-8be9-fa6a2bb3f0b4" />
+> <img width="1856" height="928" alt="image" src="https://github.com/user-attachments/assets/a485bd8a-08d1-4aa4-888f-5dbe5ff74dec" />
 >
 > **PLP**
 >
