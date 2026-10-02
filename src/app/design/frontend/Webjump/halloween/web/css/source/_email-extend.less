@@ -1,0 +1,218 @@
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Email extend styles
+//  _____________________________________________
+
+//  This file should be used for theme-specific styles for emails that extend or modify the styles in _email.less
+//  This will allow you to edit email styles without copying and editing the _email.less file
+
+//  Importing fonts from an external CSS file, rather than embedding @font-face declarations inside the <style> tag,
+//  as the latter will cause font rendering issues if the web fonts are inaccessible.
+
+@import url("@{baseUrl}css/email-fonts.css");
+
+.header {
+    background-color: @email__background-color;
+    padding: @email-body__padding;
+}
+
+.footer {
+    background-color: @email__background-color;
+    padding: @email-body__padding;
+
+    table {
+        width: 100%;
+
+        td {
+            padding-bottom: @email-body__padding;
+            width: 33%;
+
+            p {
+                margin-bottom: 0;
+
+                &.phone {
+                    font-size: @font-size__l;
+
+                    a {
+                        color: inherit;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs) {
+    .header,
+    .main-content,
+    .footer {
+        padding: @email-body__padding @indent__s !important;
+    }
+
+    .footer {
+        td {
+            display: block;
+            width: auto !important;
+        }
+    }
+}
+
+
+//
+//  Noite Assombrada - identidade da campanha
+//  _____________________________________________
+//
+//  O Emogrifier que gera o estilo inline dos e-mails só preserva seletores
+//  simples, por isso nada de pseudo-elementos ou nth-child neste arquivo.
+//
+.header {
+    background-color: #5C0000;
+    border-bottom: 3px solid #D84B20;
+}
+
+.footer {
+    background-color: #0E0E10;
+    border-top: 1px solid #26262B;
+}
+
+.greeting {
+    color: #D84B20;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.campaign-strip {
+    background-color: #1A1A1E;
+    border-bottom: 1px solid #26262B;
+    border-top: 1px solid #26262B;
+    width: 100%;
+}
+
+.campaign-strip td {
+    padding: 16px @email-body__padding;
+    text-align: center;
+}
+
+.campaign-strip__text {
+    color: #D4D4D0;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin: 0 0 8px;
+}
+
+.campaign-strip__link {
+    color: #D84B20;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.email-intro p {
+    color: #D4D4D0;
+    line-height: 24px;
+}
+
+.email-summary {
+    border-bottom: 1px solid #26262B;
+    border-top: 1px solid #26262B;
+    padding: 16px 0;
+}
+
+.email-summary h1 {
+    color: #F0EDE6;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.email-summary p {
+    color: #8E8E93;
+}
+
+.email-summary .no-link {
+    color: #D84B20;
+}
+
+h3 {
+    color: #D84B20;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+a {
+    color: #D84B20;
+}
+
+.no-link {
+    color: #D4D4D0;
+}
+
+.message-info,
+.order-details,
+.email-items {
+    border: 1px solid #26262B;
+}
+
+.message-info td,
+.order-details td {
+    border: 0;
+    border-bottom: 1px solid #26262B;
+    color: #D4D4D0;
+    padding: 12px;
+}
+
+.order-details .address-details,
+.order-details .method-info {
+    border-right: 1px solid #26262B;
+}
+
+.email-items th {
+    background-color: #0E0E10;
+    border-bottom: 2px solid #D84B20;
+    color: #F0EDE6;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.email-items td {
+    border-bottom: 1px solid #26262B;
+    color: #D4D4D0;
+    font-size: 13px;
+}
+
+.email-items .order-totals td {
+    border-bottom: 0;
+    color: #F0EDE6;
+    font-weight: 700;
+}
+
+.email-items .order-totals .label {
+    color: #8E8E93;
+    font-weight: 400;
+}
+
+.button {
+    background-color: #5C0000;
+    border: 1px solid #D84B20;
+}
+
+.button a {
+    color: #FFFFFF;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}

@@ -1,0 +1,63 @@
+.halloween-campaign-bar {
+    box-sizing: border-box;
+    width: 100%;
+    background: linear-gradient(90deg, #5C0000 0%, #141416 55%, #0A0A0C 100%);
+    border-bottom: 1px solid #26262B;
+    border-top: 1px solid rgba(216, 75, 32, 0.35);
+
+    .halloween-campaign-bar__inner {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: @indent__s @indent__base;
+        padding: @indent__s @indent__l;
+        text-align: center;
+    }
+
+    .halloween-campaign-bar__text {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.6rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #F0EDE6;
+        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+    }
+
+    .halloween-campaign-bar__link {
+        display: inline-block;
+        padding: 4px 16px;
+        background: transparent;
+        border: 1px solid #D84B20;
+        border-radius: 3px;
+        color: #D84B20;
+        font-size: 1.3rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-decoration: none;
+        text-transform: uppercase;
+        white-space: nowrap;
+        transition: all 0.3s ease;
+
+        &:hover,
+        &:focus {
+            background: #D84B20;
+            border-color: #FF7043;
+            color: #0A0A0C;
+        }
+    }
+}
+
+@media all and (max-width: (@screen__s - 1)) {
+    .halloween-campaign-bar {
+        .halloween-campaign-bar__inner {
+            padding: @indent__s @indent__m;
+        }
+
+        .halloween-campaign-bar__text {
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+        }
+    }
+}

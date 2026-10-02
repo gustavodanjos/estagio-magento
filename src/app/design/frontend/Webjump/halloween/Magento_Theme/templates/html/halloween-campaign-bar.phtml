@@ -1,0 +1,17 @@
+<?php
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+?>
+<div class="halloween-campaign-bar" role="region" aria-label="<?= $escaper->escapeHtmlAttr(__('Noite Assombrada')) ?>">
+    <div class="halloween-campaign-bar__inner">
+        <span class="halloween-campaign-bar__text">
+            <?= $escaper->escapeHtml(__('The Noite Assombrada campaign runs until October 31.')) ?>
+        </span>
+        <a class="halloween-campaign-bar__link"
+           href="<?= $escaper->escapeUrl($block->getUrl('catalogsearch/result', ['q' => 'halloween'])) ?>">
+            <?= $escaper->escapeHtml(__('See the collection')) ?>
+        </a>
+    </div>
+</div>

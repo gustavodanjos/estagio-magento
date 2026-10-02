@@ -2,7 +2,6 @@
 
 Tema customizado de Halloween para Magento 2, com herança direta de `Magento/luma` (`Webjump/halloween`). Nenhum arquivo em `vendor/` ou no tema Luma foi alterado.
 
-A documentação completa do desafio (arquitetura, configuração pelo Admin, problemas encontrados e evidências) está em `docs/README-16.1.md`.
 
 ## Organização
 
@@ -11,6 +10,16 @@ A documentação completa do desafio (arquitetura, configuração pelo Admin, pr
 - `Magento_Checkout/web/css/source/_extend.less`: superfície escura e contraste dos textos do minicarrinho;
 - `Magento_Catalog/web/css/source/_extend.less`: fundo e cores da toolbar do catálogo;
 - `web/fonts/cormorant-garamond-bold.woff2`: fonte local carregada com `@font-face` e `@{baseDir}`.
+
+## Campanha Noite Assombrada
+
+- `Magento_Theme/layout/default.xml`: faixa `halloween.campaign.bar` em `page.top`, remoção de `catalog.compare.sidebar` e `top.search` movido para `header.panel`;
+- `Magento_Theme/templates/html/halloween-campaign-bar.phtml`: markup da faixa, único ponto do tema que poderia quebrar o cabeçalho do Luma;
+- `web/css/source/extend/_campaign-bar.less`: estilo responsivo da faixa;
+- `Magento_Search/templates/form.mini.phtml`: cópia integral do original com a marcação da busca ajustada;
+- `i18n/en_US.csv`: vocabulário gótico-vitoriano da loja, textos da faixa e assunto do e-mail;
+- `Magento_Sales/email/order_new.html` e `order_new_guest.html`: cópias integrais com a faixa de campanha e a identidade escura;
+- `web/css/source/_email-variables.less` e `_email-extend.less`: e-mail dark completo.
 
 Os dois `_extend.less` de módulo existem porque `Magento_Checkout` e `Magento_Catalog` não têm parciais próprios no tema. Como parciais de módulo são compiladas depois de `web/css/source/_extend.less` dentro do mesmo `styles-m.css`, elas vencem o Luma em empate de especificidade. Já as regras que precisam ganhar do Luma carregado no `styles-l.css` (desktop) recebem o prefixo `body`, como em `body .modes-mode.active`.
 
