@@ -1,0 +1,111 @@
+@footer-atmosphere-ratio: 1600 / 317;
+@footer-atmosphere-max-height: 320px;
+@footer-atmosphere-fade-top: 30%;
+@footer-atmosphere-fade-bottom: 18%;
+
+.page-footer {
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid #26262B;
+    background-color: #141416;
+
+    .footer.content {
+        border-top: none;
+    }
+
+    .links a {
+        color: #F0EDE6;
+
+        &:hover,
+        &:focus {
+            color: #FF7043;
+        }
+    }
+
+    .switcher {
+        a,
+        strong {
+            color: #F0EDE6;
+        }
+
+        a:hover,
+        a:focus {
+            color: #FF7043;
+        }
+    }
+
+    .halloween-footer-bg {
+        position: relative;
+        width: 100%;
+        aspect-ratio: @footer-atmosphere-ratio;
+        max-height: @footer-atmosphere-max-height;
+        background-color: #141416;
+        background-size: cover;
+        background-position: center bottom;
+        background-repeat: no-repeat;
+
+        &:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            height: @footer-atmosphere-fade-bottom;
+            background: linear-gradient(0deg, #0E0E10 0%, rgba(14, 14, 16, 0) 100%);
+            pointer-events: none;
+        }
+
+        &:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            height: @footer-atmosphere-fade-top;
+            background: linear-gradient(180deg, #141416 0%, rgba(20, 20, 22, 0) 100%);
+            pointer-events: none;
+        }
+    }
+}
+
+.copyright,
+.page-footer .copyright {
+    background-color: #0E0E10;
+    color: #D4D4D0;
+    border-top: 1px solid #1A1A1E;
+    padding: 15px 0;
+}
+
+@media all and (min-width: @screen__m) and (max-width: (@screen__l - 1)) {
+    .page-footer .block.newsletter {
+        max-width: none;
+        width: 100%;
+
+        .form.subscribe {
+            display: block;
+
+            > .field.newsletter {
+                max-width: none;
+            }
+
+            > .actions {
+                display: block;
+                float: none;
+                width: auto;
+                margin-top: 10px;
+            }
+        }
+
+        .action.subscribe {
+            width: 100%;
+        }
+    }
+}
+
+@media all and (max-width: (@screen__m - 1)) {
+    .page-footer {
+        .links a {
+            font-size: 1.6rem;
+        }
+    }
+}

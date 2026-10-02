@@ -1,0 +1,51 @@
+<?php
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Webjump\Gustavo\ViewModel\Halloween $viewModel
+ */
+$viewModel = $block->getData('view_model');
+if (!$viewModel instanceof \Webjump\Gustavo\ViewModel\Halloween || !$viewModel->isHeroEnabled()) {
+    return;
+}
+
+$imageUrl = $viewModel->getHeroImageUrl();
+$title = $viewModel->isHeroTextVisible() ? $viewModel->getHeroTitle() : '';
+$subtitle = $viewModel->isHeroTextVisible() ? $viewModel->getHeroSubtitle() : '';
+$hasButton = $viewModel->hasHeroButton();
+
+if ($imageUrl === '' && $title === '' && $subtitle === '' && !$hasButton) {
+    return;
+}
+
+$hasText = $title !== '' || $subtitle !== '';
+$modifierClasses = $imageUrl === '' ? ' halloween-hero--no-image' : '';
+if (!$hasText && !$hasButton) {
+    $modifierClasses .= ' halloween-hero--image-only';
+}
+?>
+<section class="halloween-hero<?= $escaper->escapeHtmlAttr($modifierClasses) ?>"
+         aria-label="<?= $escaper->escapeHtmlAttr(__('Halloween Hero Banner')) ?>">
+    <?php if ($imageUrl !== ''): ?>
+        <div class="halloween-hero__backdrop"
+             style="background-image: url('<?= $escaper->escapeUrl($imageUrl) ?>'); opacity: <?= $escaper->escapeHtmlAttr((string)$viewModel->getHeroOpacity()) ?>;">
+        </div>
+    <?php endif; ?>
+    <?php if ($hasText || $hasButton): ?>
+        <div class="halloween-hero__content">
+            <?php if ($title !== ''): ?>
+                <h1 class="halloween-hero__title"><?= $escaper->escapeHtml($title) ?></h1>
+            <?php endif; ?>
+            <?php if ($subtitle !== ''): ?>
+                <p class="halloween-hero__subtitle"><?= $escaper->escapeHtml($subtitle) ?></p>
+            <?php endif; ?>
+            <?php if ($hasButton): ?>
+                <a href="<?= $escaper->escapeUrl($viewModel->getHeroButtonUrl()) ?>"
+                   class="halloween-hero__cta action primary"
+                   id="halloween-hero-cta">
+                    <?= $escaper->escapeHtml($viewModel->getHeroButtonText()) ?>
+                </a>
+            <?php endif; ?>
+        </div>
+    <?php endif; ?>
+</section>

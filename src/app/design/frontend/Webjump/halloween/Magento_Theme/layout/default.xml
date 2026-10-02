@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+
+        <referenceBlock name="logo">
+            <arguments>
+                <argument name="logo_file" xsi:type="string">images/logo-halloween.png</argument>
+                <argument name="logo_alt" xsi:type="string">Tradição</argument>
+            </arguments>
+        </referenceBlock>
+
+        <referenceContainer name="footer-container">
+            <block class="Magento\Framework\View\Element\Template"
+                   name="halloween.footer.bg"
+                   template="Webjump_Gustavo::halloween_footer_bg.phtml"
+                   after="footer">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Webjump\Gustavo\ViewModel\Halloween</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+
+        <move element="copyright"
+              destination="footer-container"
+              after="halloween.footer.bg"/>
+
+    </body>
+</page>
