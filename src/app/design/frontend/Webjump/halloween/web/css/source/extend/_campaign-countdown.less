@@ -1,0 +1,32 @@
+.halloween-countdown {
+    box-sizing: border-box;
+    width: 100%;
+    margin: @indent__base 0;
+    padding: @indent__s @indent__l;
+    background: linear-gradient(90deg, #141416 0%, #1A0E0A 50%, #141416 100%);
+    border-top: 1px solid rgba(216, 75, 32, 0.35);
+    border-bottom: 1px solid #26262B;
+    text-align: center;
+
+    .halloween-countdown__message {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.8rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #F0EDE6;
+        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+    }
+}
+
+@media all and (max-width: (@screen__s - 1)) {
+    .halloween-countdown {
+        margin: @indent__base 0;
+        padding: @indent__s @indent__m;
+
+        .halloween-countdown__message {
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+        }
+    }
+}
