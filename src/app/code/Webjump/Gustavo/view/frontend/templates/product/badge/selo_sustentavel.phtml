@@ -1,22 +1,31 @@
 <?php
 /**
- * Partial template for rendering the Selo Sustentável badge
+ * Partial template for rendering the product seal badge
  *
  * @var \Magento\Framework\View\Element\Template $block
  */
+use Webjump\Gustavo\Model\Attribute\Source\ProductSelo;
+use Webjump\Gustavo\ViewModel\ProductSeloSustentavel;
+
 $_product = $block->getData('_product');
 if (!$_product) {
     return;
 }
 
-$seloValue = $_product->getData('selo_sustentavel');
-$hasSelo = $seloValue === '1' || $seloValue === 1 || $seloValue === true;
+$seloValue = ProductSeloSustentavel::normalize($_product->getData(ProductSelo::ATTRIBUTE_CODE));
 
-if (!$hasSelo) {
+if ($seloValue === null) {
     return;
 }
 ?>
-<div class="selo-sustentavel selo-sustentavel--card" data-selo="sustentavel">
-    <span class="selo-sustentavel__icon" aria-hidden="true"></span>
-    <span class="selo-sustentavel__label"><?= $block->escapeHtml(__('Sustentável')) ?></span>
-</div>
+<?php if ($seloValue === ProductSelo::OPTION_SUSTENTAVEL): ?>
+    <div class="selo-sustentavel selo-sustentavel--card" data-selo="sustentavel">
+        <span class="selo-sustentavel__icon" aria-hidden="true"></span>
+        <span class="selo-sustentavel__label"><?= $block->escapeHtml(__('Sustentável')) ?></span>
+    </div>
+<?php else: ?>
+    <div class="selo-assombrado selo-assombrado--card" data-selo="assombrado">
+        <span class="selo-assombrado__icon" aria-hidden="true"></span>
+        <span class="selo-assombrado__label"><?= $block->escapeHtml(__('Haunted')) ?></span>
+    </div>
+<?php endif; ?>
