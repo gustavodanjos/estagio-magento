@@ -3,6 +3,14 @@
     <body>
         <referenceContainer name="product.info.main">
             <block class="Magento\Framework\View\Element\Template"
+                   name="halloween.countdown"
+                   template="Webjump_Gustavo::halloween_countdown.phtml"
+                   before="product.info.price">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Webjump\Gustavo\ViewModel\HalloweenCountdown</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Framework\View\Element\Template"
                    name="product.selo.sustentavel"
                    template="Webjump_Gustavo::product/view/selo.phtml"
                    after="product.info.price">
