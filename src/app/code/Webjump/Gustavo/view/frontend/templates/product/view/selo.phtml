@@ -3,16 +3,27 @@
  * @var \Magento\Framework\View\Element\Template $block
  * @var \Webjump\Gustavo\ViewModel\ProductSeloSustentavel $viewModel
  */
+use Webjump\Gustavo\Model\Attribute\Source\ProductSelo;
+
 $viewModel = $block->getData('view_model');
 if (!$viewModel instanceof \Webjump\Gustavo\ViewModel\ProductSeloSustentavel) {
     return;
 }
 
-if (!$viewModel->hasSeloSustentavel()) {
+$seloValue = $viewModel->getSeloValue();
+
+if ($seloValue === null) {
     return;
 }
 ?>
-<div class="selo-sustentavel selo-sustentavel--pdp" data-selo="sustentavel">
-    <span class="selo-sustentavel__icon" aria-hidden="true"></span>
-    <span class="selo-sustentavel__label"><?= $block->escapeHtml(__('Produto Sustentável')) ?></span>
-</div>
+<?php if ($seloValue === ProductSelo::OPTION_SUSTENTAVEL): ?>
+    <div class="selo-sustentavel selo-sustentavel--pdp" data-selo="sustentavel">
+        <span class="selo-sustentavel__icon" aria-hidden="true"></span>
+        <span class="selo-sustentavel__label"><?= $block->escapeHtml(__('Produto Sustentável')) ?></span>
+    </div>
+<?php else: ?>
+    <div class="selo-assombrado selo-assombrado--pdp" data-selo="assombrado">
+        <span class="selo-assombrado__icon" aria-hidden="true"></span>
+        <span class="selo-assombrado__label"><?= $block->escapeHtml(__('Haunted Product')) ?></span>
+    </div>
+<?php endif; ?>
