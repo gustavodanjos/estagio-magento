@@ -15,6 +15,14 @@
                     <argument name="view_model" xsi:type="object">Webjump\Gustavo\ViewModel\Halloween</argument>
                 </arguments>
             </block>
+            <block class="Magento\Framework\View\Element\Template"
+                   name="halloween.countdown"
+                   template="Webjump_Gustavo::halloween_countdown.phtml"
+                   after="halloween.hero.banner">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Webjump\Gustavo\ViewModel\HalloweenCountdown</argument>
+                </arguments>
+            </block>
         </referenceContainer>
     </body>
 </page>
