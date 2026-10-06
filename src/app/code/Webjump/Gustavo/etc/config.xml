@@ -25,6 +25,7 @@
                 <hero_button_link>/catalogsearch/result/?q=halloween</hero_button_link>
                 <footer_show_image>1</footer_show_image>
                 <footer_opacity>0.35</footer_opacity>
+                <countdown_enabled>1</countdown_enabled>
             </halloween_theme>
         </webjump_gustavo>
     </default>

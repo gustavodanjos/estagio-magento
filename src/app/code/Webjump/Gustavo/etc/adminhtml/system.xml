@@ -108,6 +108,11 @@
                     <comment>Opacidade da imagem de fundo do footer entre 0 e 1. Ex: 0.35</comment>
                     <validate>validate-number validate-zero-or-greater</validate>
                 </field>
+                <field id="countdown_enabled" translate="label comment" type="select" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Exibir a Contagem Regressiva</label>
+                    <comment>Quando desabilitado, o contador não é renderizado na página inicial nem na página de produto. Depois que a campanha termina, o contador exibe a mensagem de encerramento; desmarque este campo para removê-lo do storefront.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
             </group>
         </section>
     </system>
