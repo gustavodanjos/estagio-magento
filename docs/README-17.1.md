@@ -198,7 +198,7 @@ Card e PDP compartilham a estrutura `__icon` + `__label`, mas cada estado tem su
 
 > Produto antigo, com `selo = 1`, continua exibindo "Produto Sustentável" no estilo de antes.
 
-> <img width="1231" height="699" alt="image" src="https://github.com/user-attachments/assets/75a477f0-d18c-482e-9399-82de96f93cde" />
+> <img width="1319" height="553" alt="image" src="https://github.com/user-attachments/assets/de8eae54-edc6-4897-9dd1-f3737e463b6a" />
 
 ### 5. Selo na listagem
 
