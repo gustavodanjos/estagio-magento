@@ -4,4 +4,8 @@
         <observer name="webjump_gustavo_catalog_product_save_after"
                   instance="Webjump\Gustavo\Observer\LogProductSaveAfter"/>
     </event>
+    <event name="catalog_block_product_list_collection">
+        <observer name="webjump_gustavo_catalog_block_product_list_collection"
+                  instance="Webjump\Gustavo\Observer\AddProductSeloToListCollection"/>
+    </event>
 </config>
