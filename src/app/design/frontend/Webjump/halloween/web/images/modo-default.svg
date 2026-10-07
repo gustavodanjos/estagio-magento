@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <!-- Fundo transparente ou pode adicionar fundo preto/escuro se desejar -->
+  
+  <g fill="#D4D4D0">
+    <!-- Olho Esquerdo -->
+    <ellipse cx="68" cy="78" rx="10" ry="16" transform="rotate(-10 68 78)" />
+    
+    <!-- Olho Direito -->
+    <ellipse cx="130" cy="72" rx="16" ry="22" transform="rotate(8 130 72)" />
+    
+    <!-- Sorriso / Boca Assustadora -->
+    <path d="M 15,110 
+             Q 25,120 35,115 
+             Q 45,140 55,120 
+             Q 70,150 82,122 
+             Q 95,155 108,122 
+             Q 125,150 138,120 
+             Q 150,140 162,115 
+             Q 175,120 185,110 
+             Q 170,130 155,145 
+             Q 100,175 45,145 
+             Q 30,130 15,110 Z" />
+  </g>
+</svg>
