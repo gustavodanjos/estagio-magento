@@ -1,15 +1,5 @@
-//
-//  Modo assombrado: variante mais escura do tema, ligada pela classe
-//  `haunted-mode` no elemento raiz (<html>) pelo interruptor do cabecalho.
-//
 html.haunted-mode {
-    // A cena vai no elemento raiz e nao no body: a caixa do body tem apenas a
-    // altura do viewport (Luma aplica height: 100% em html/body), entao a imagem
-    // era recortada e sumia ao rolar listagens longas. O fundo da raiz cobre o
-    // canvas inteiro, acompanhando a pagina.
     background-color: #050506;
-    // background-attachment: fixed mantem a cena presa ao viewport enquanto o
-    // conteudo rola; navegadores sem suporte (ex.: iOS Safari) seguem estaticos.
     background-image: linear-gradient(rgba(5, 5, 6, 0.55), rgba(5, 5, 6, 0.55)),
         url('@{baseDir}images/back-assombrado.jpg');
     background-repeat: no-repeat, no-repeat;
@@ -18,16 +8,11 @@ html.haunted-mode {
     background-attachment: fixed, fixed;
 
     body {
-        // Deixa o fundo da raiz aparecer: o body cobre todo o viewport e, se
-        // mantivesse cor propria, esconderia a imagem.
         background-color: transparent;
         background-image: none;
     }
 
     .page-header {
-        // backdrop-filter faria do cabecalho um containing block para
-        // position: fixed, prendendo a sidebar do minicart à sua caixa.
-        // No modo assombrado o fundo já é opaco, dispensando o blur.
         background-color: rgba(8, 5, 7, 0.42);
         backdrop-filter: none;
         -webkit-backdrop-filter: none;
@@ -65,8 +50,6 @@ html.haunted-mode {
         border-top-color: #3A1F1F;
     }
 
-    // No modo assombrado a cena do rodape e dispensavel (ja ha o fundo assombrado
-// na pagina). Removemos o backdrop por completo para um acabamento mais limpo.
     .halloween-footer-bg {
         display: none;
     }
@@ -76,16 +59,11 @@ html.haunted-mode {
         border-color: #3A1F1F;
     }
 
-    // O backdrop do hero nasce com background-image em inline style no phtml,
-    // entao a troca da imagem precisa vencer o inline com !important.
     .halloween-hero__backdrop {
         background-image: url('@{baseDir}images/banner-assombrado.jpg') !important;
     }
 }
 
-// Cross-fade entre os dois estados da página, disparado por document.startViewTransition
-// em halloween-mode.js. A guarda de prefers-reduced-motion é feita lá e aqui, já que
-// quem decide animar é o navegador.
 @media (prefers-reduced-motion: no-preference) {
     ::view-transition-old(root),
     ::view-transition-new(root) {

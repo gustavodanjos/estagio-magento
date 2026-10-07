@@ -79,8 +79,6 @@ html.haunted-mode {
     }
 }
 
-// No desktop o pill flutua à direita no cabecalho, imediatamente à esquerda do
-// carrinho (o margin-left: 13px do .minicart-wrapper faz o espaçamento entre os dois).
 .header.content .haunted-mode-toggle {
     float: right;
     height: 28px;
@@ -93,15 +91,11 @@ html.haunted-mode {
     }
 
     html.nav-open {
-        // O blur do cabecalho faria dele o containing block do pill fixo,
-        // prendendo-o à caixa deslocada do .page-wrapper em vez da viewport.
         .page-header {
             backdrop-filter: none;
             -webkit-backdrop-filter: none;
         }
 
-        // Sem o blur, o scrim do .nav-toggle também passa a ser relativo à
-        // viewport: restrito à faixa que sobra fora do drawer, como no Luma.
         .nav-toggle:after {
             width: @active-nav-indent;
         }

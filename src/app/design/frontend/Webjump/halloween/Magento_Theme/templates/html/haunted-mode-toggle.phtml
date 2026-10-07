@@ -27,7 +27,6 @@ $hauntedAssets = [
     <span class="haunted-mode-toggle__label haunted-mode-toggle__label--on"><?= $escaper->escapeHtml(__('Turn off Haunted Mode')) ?></span>
 </button>
 <script>
-    // Aplica a classe antes do paint para evitar flash; se o storage falhar, o componente via deps cuida do restante.
     try {
         if (localStorage.getItem('webjump-haunted-mode') === '1') {
             document.documentElement.classList.add('haunted-mode');
