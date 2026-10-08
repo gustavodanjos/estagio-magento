@@ -18,6 +18,13 @@
                 disabled="false"/>
     </type>
 
+    <type name="Magento\Sales\Model\Service\OrderService">
+        <plugin name="webjump_gustavo_copy_mensagem_assombrada"
+                type="Webjump\Gustavo\Plugin\Sales\Model\Service\CopyMensagemAssombradaPlugin"
+                sortOrder="10"
+                disabled="false"/>
+    </type>
+
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
