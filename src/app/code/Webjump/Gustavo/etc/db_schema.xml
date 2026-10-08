@@ -16,4 +16,12 @@
                     referenceTable="catalog_product_entity" referenceColumn="entity_id"
                     onDelete="CASCADE"/>
     </table>
+    <table name="quote" resource="default">
+        <column xsi:type="varchar" name="webjump_gustavo_mensagem" nullable="true" length="255"
+                comment="Haunted Message From Checkout"/>
+    </table>
+    <table name="sales_order" resource="default">
+        <column xsi:type="varchar" name="webjump_gustavo_mensagem" nullable="true" length="255"
+                comment="Haunted Message From Checkout"/>
+    </table>
 </schema>
