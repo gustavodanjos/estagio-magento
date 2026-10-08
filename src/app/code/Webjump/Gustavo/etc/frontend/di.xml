@@ -12,6 +12,10 @@
                 type="Webjump\Gustavo\Plugin\Checkout\Block\Checkout\AddMensagemAssombradaPlugin"
                 sortOrder="10"
                 disabled="false"/>
+        <plugin name="webjump_gustavo_translate_shipping_step_labels"
+                type="Webjump\Gustavo\Plugin\Checkout\Block\Checkout\TranslateShippingStepLabelsPlugin"
+                sortOrder="20"
+                disabled="false"/>
     </type>
 
 </config>
