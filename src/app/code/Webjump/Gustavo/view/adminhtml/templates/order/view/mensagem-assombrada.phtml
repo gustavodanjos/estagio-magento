@@ -1,0 +1,8 @@
+<?php
+/** @var \Webjump\Gustavo\Block\Adminhtml\Order\View\MensagemAssombrada $block */
+$mensagem = $block->getMensagem();
+?>
+<tr>
+    <th><?= $block->escapeHtml(__('Haunted message')) ?></th>
+    <td><?= $block->escapeHtml($mensagem ?? '—') ?></td>
+</tr>
