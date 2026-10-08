@@ -1,0 +1,53 @@
+// /**
+// * Copyright © Webjump. All rights reserved.
+// */
+
+.icon-pagebuilder-offer-box {
+    &:before {
+        background-color: currentColor;
+        content: '';
+        display: inline-block;
+        height: 1em;
+        -webkit-mask: url('@{baseDir}Webjump_OfferBox/images/coffin.svg') no-repeat center / contain;
+        mask: url('@{baseDir}Webjump_OfferBox/images/coffin.svg') no-repeat center / contain;
+        width: 1em;
+    }
+}
+
+.pagebuilder-content-type.pagebuilder-offer-box {
+    .pagebuilder-offer-box-wrapper {
+        min-height: 80px;
+    }
+
+    .pagebuilder-offer-box-image {
+        display: block;
+        height: auto;
+        width: 100%;
+    }
+
+    [data-image-size='medium'] .pagebuilder-offer-box-image {
+        margin-left: auto;
+        margin-right: auto;
+        max-height: 320px;
+        max-width: 100%;
+        width: auto;
+    }
+
+    [data-image-size='small'] .pagebuilder-offer-box-image {
+        margin-left: auto;
+        margin-right: auto;
+        max-height: 200px;
+        max-width: 100%;
+        width: auto;
+    }
+
+    .pagebuilder-offer-box-image-placeholder {
+        align-items: center;
+        border: 1px dashed @color-gray68;
+        color: @color-gray60;
+        display: flex;
+        font-size: 14px;
+        justify-content: center;
+        min-height: 120px;
+    }
+}
