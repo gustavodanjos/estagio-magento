@@ -1,0 +1,48 @@
+<!--
+/**
+ * Copyright © Webjump. All rights reserved.
+ */
+-->
+
+<div class="pagebuilder-content-type pagebuilder-offer-box type-nested" event="{ mouseover: onMouseOver, mouseout: onMouseOut }, mouseoverBubble: false">
+    <render args="getOptions().template"></render>
+    <div class="pagebuilder-offer-box-wrapper"
+         attr="Object.assign({}, data.wrapper.attributes(), data.main.attributes())"
+         ko-style="Object.assign({}, data.wrapper.style(), data.main.style())"
+         css="Object.assign({}, data.wrapper.css(), data.main.css())">
+        <img if="data.image.attributes().src"
+             class="pagebuilder-offer-box-image"
+             attr="data.image.attributes"
+             ko-style="data.image.style"
+             css="data.image.css" />
+        <!-- ko ifnot: data.image.attributes().src -->
+        <div class="pagebuilder-offer-box-image-placeholder"></div>
+        <!-- /ko -->
+        <div class="pagebuilder-offer-box-content">
+            <!-- ko if: data.badge.html() -->
+            <!-- ko with: data.badge -->
+            <!-- ko with: {attributes: attributes, style: style, css: css, dataBadgeUnsanitizedHtml: html} -->
+            <div class="pagebuilder-offer-box-badge" attr="attributes" ko-style="style" css="css" html="dataBadgeUnsanitizedHtml"></div>
+            <!-- /ko -->
+            <!-- /ko -->
+            <!-- /ko -->
+            <!-- ko with: data.title -->
+            <!-- ko with: {attributes: attributes, style: style, css: css, dataTitleUnsanitizedHtml: html} -->
+            <div class="pagebuilder-offer-box-title" attr="attributes" ko-style="style" css="css" html="dataTitleUnsanitizedHtml"></div>
+            <!-- /ko -->
+            <!-- /ko -->
+            <!-- ko with: data.desc -->
+            <!-- ko with: {attributes: attributes, style: style, css: css, dataDescUnsanitizedHtml: html} -->
+            <div class="pagebuilder-offer-box-desc" attr="attributes" ko-style="style" css="css" html="dataDescUnsanitizedHtml"></div>
+            <!-- /ko -->
+            <!-- /ko -->
+            <!-- ko if: data.button.html() -->
+            <!-- ko with: data.button -->
+            <!-- ko with: {attributes: attributes, style: style, css: css, dataButtonUnsanitizedHtml: html} -->
+            <span class="pagebuilder-offer-box-button" attr="attributes" ko-style="style" css="css" html="dataButtonUnsanitizedHtml"></span>
+            <!-- /ko -->
+            <!-- /ko -->
+            <!-- /ko -->
+        </div>
+    </div>
+</div>
