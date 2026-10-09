@@ -142,8 +142,8 @@ Validações de runtime (via Playwright, sessoes independentes A e B): `navigati
 
 ### 5. Demonstração final do desafio em vídeo
 
-> **A abóbora aparece → o usuário clica nela → uma imagem jumpscare.svg é jogada na tela → O contador de sustos atualiza sem recarregar a página**
-> [Demo-17.6](https://github.com/user-attachments/assets/aa90ff97-02f0-4f74-8fbb-5cf7e3d5a7c9)
+> **A abóbora aparece → o usuário clica nela → uma das 3 imagens jumpscare.svg é jogada na tela → O contador de sustos atualiza sem recarregar a página**
+> [Gravação de tela de 2026-10-09 10-47-27.webm](https://github.com/user-attachments/assets/78b25f12-d829-4919-b83e-5a559c6b4ccd)
 
 
 
