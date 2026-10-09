@@ -25,7 +25,8 @@ $countdownConfigJson = json_encode(
      data-role="halloween-countdown"
      data-bind="scope: 'halloweenCountdown'"
      aria-live="polite">
-    <span class="halloween-countdown__message" data-bind="text: message"></span>
+    <span class="halloween-countdown__message"
+          data-bind="text: message, shake: { intensity: 'low', duration: 1000, trigger: 'loop' }"></span>
 </div>
 <script type="text/x-magento-init">
 {
