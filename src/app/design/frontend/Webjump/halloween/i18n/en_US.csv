@@ -9,6 +9,12 @@
 "The Noite Assombrada campaign runs until October 31.","A campanha Noite Assombrada vai até 31 de outubro"
 "See the collection","Ver a coleção"
 "Noite Assombrada: your %store_name order is confirmed","Noite Assombrada: seu pedido na %store_name está confirmado"
+"Turn on Haunted Mode","Ativar modo assombrado"
+"Turn off Haunted Mode","Desativar modo assombrado"
+"Your casket is empty... for now.","Sua cesta está vazia... por enquanto."
+"One relic haunts your casket.","Uma relíquia assombra sua cesta."
+"%1 relics haunt your casket.","%1 relíquias assombram sua cesta."
+"Your casket overflows with %1 relics!","Sua cesta transborda com %1 relíquias!"
 "The Haunted Night ends in %1","A Noite Assombrada termina em %1"
 "day","dia"
 "days","dias"
@@ -22,3 +28,4 @@
 "The campaign is over. The spirits rest... for now.","A campanha terminou. Os espíritos descansam... por enquanto."
 "Haunted","Assombrado"
 "Haunted Product","Produto Assombrado"
+

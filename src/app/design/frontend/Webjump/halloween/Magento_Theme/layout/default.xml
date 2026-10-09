@@ -34,6 +34,13 @@
               destination="header.panel"
               after="-"/>
 
+        <referenceContainer name="header-wrapper">
+            <block class="Magento\Framework\View\Element\Template"
+                   name="haunted.mode.toggle"
+                   template="Magento_Theme::html/haunted-mode-toggle.phtml"
+                   after="minicart"/>
+        </referenceContainer>
+
         <referenceBlock name="copyright" remove="true"/>
 
     </body>

@@ -1,0 +1,110 @@
+.haunted-mode-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 14px;
+    background: #1E1E24;
+    border: 1px solid #3A3A42;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover,
+    &:focus-visible {
+        border-color: #D84B20;
+        outline: none;
+    }
+
+    &__icon {
+        position: relative;
+        display: inline-block;
+        width: 22px;
+        height: 22px;
+        flex: 0 0 22px;
+    }
+
+    &__img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transition: opacity 0.2s ease;
+
+        &--haunted {
+            opacity: 0;
+        }
+    }
+
+    &__label {
+        color: #D4D4D0;
+        font-size: 1.2rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        line-height: 1;
+        text-transform: uppercase;
+        white-space: nowrap;
+
+        &--on {
+            display: none;
+        }
+    }
+}
+
+html.haunted-mode {
+    .haunted-mode-toggle {
+        background: #2A0F0F;
+        border-color: #D84B20;
+        box-shadow: 0 0 12px rgba(216, 75, 32, 0.35);
+
+        .haunted-mode-toggle__img--default {
+            opacity: 0;
+        }
+
+        .haunted-mode-toggle__img--haunted {
+            opacity: 1;
+        }
+
+        .haunted-mode-toggle__label {
+            color: #D84B20;
+        }
+
+        .haunted-mode-toggle__label--off {
+            display: none;
+        }
+
+        .haunted-mode-toggle__label--on {
+            display: inline;
+        }
+    }
+}
+
+.header.content .haunted-mode-toggle {
+    float: right;
+    height: 28px;
+    padding: 0 12px;
+}
+
+@media all and (max-width: (@screen__m - 1)) {
+    .haunted-mode-toggle {
+        display: none;
+    }
+
+    html.nav-open {
+        .page-header {
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+        }
+
+        .nav-toggle:after {
+            width: @active-nav-indent;
+        }
+
+        .haunted-mode-toggle {
+            display: inline-flex;
+            position: fixed;
+            right: calc(~'@{active-nav-indent} + 12px');
+            bottom: 24px;
+        }
+    }
+}

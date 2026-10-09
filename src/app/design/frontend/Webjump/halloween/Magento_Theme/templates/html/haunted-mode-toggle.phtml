@@ -1,0 +1,35 @@
+<?php
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+$hauntedAssets = [
+    $block->getViewFileUrl('images/back-assombrado.jpg'),
+    $block->getViewFileUrl('images/banner-assombrado.jpg'),
+    $block->getViewFileUrl('images/carrinho-assombrado.jpg'),
+];
+?>
+<button type="button"
+        class="haunted-mode-toggle"
+        role="switch"
+        aria-checked="false"
+        data-haunted-mode-toggle
+        data-haunted-assets="<?= $escaper->escapeHtmlAttr(json_encode($hauntedAssets)) ?>">
+    <span class="haunted-mode-toggle__icon" aria-hidden="true">
+        <img class="haunted-mode-toggle__img haunted-mode-toggle__img--default"
+             src="<?= $escaper->escapeUrl($block->getViewFileUrl('images/modo-default.svg')) ?>"
+             alt="">
+        <img class="haunted-mode-toggle__img haunted-mode-toggle__img--haunted"
+             src="<?= $escaper->escapeUrl($block->getViewFileUrl('images/modo-assombrado.svg')) ?>"
+             alt="">
+    </span>
+    <span class="haunted-mode-toggle__label haunted-mode-toggle__label--off"><?= $escaper->escapeHtml(__('Turn on Haunted Mode')) ?></span>
+    <span class="haunted-mode-toggle__label haunted-mode-toggle__label--on"><?= $escaper->escapeHtml(__('Turn off Haunted Mode')) ?></span>
+</button>
+<script>
+    try {
+        if (localStorage.getItem('webjump-haunted-mode') === '1') {
+            document.documentElement.classList.add('haunted-mode');
+        }
+    } catch (e) {}
+</script>
