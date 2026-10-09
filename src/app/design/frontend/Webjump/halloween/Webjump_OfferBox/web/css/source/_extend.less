@@ -1,21 +1,50 @@
-// /**
-// * Copyright © Webjump. All rights reserved.
-// */
-
-//
-//  Halloween "Noite Assombrada" identity for the offer box
-//  _____________________________________________
+@offer-box-coffin__max-width: 600px;
 
 & when (@media-common = true) {
     .pagebuilder-offer-box-wrapper {
-        background-color: @panel__background-color;
-        border: 1px solid @border-color__base;
+        aspect-ratio: ~"400 / 440";
+        background-image: url('@{baseDir}Webjump_OfferBox/images/caixao.svg');
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: @offer-box-coffin__max-width;
+
+        .pagebuilder-offer-box-content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            min-height: 0;
+            padding: 21% 25% 23%;
+        }
+
+        .pagebuilder-offer-box-image {
+            flex: 0 1 auto;
+            margin-bottom: 16px;
+            min-height: 0;
+            object-fit: contain;
+        }
+
+        .pagebuilder-offer-box-title {
+            color: #FFB347;
+            font-family: @heading__font-family__base;
+            font-size: 34px;
+            font-weight: @heading__font-weight__base;
+            line-height: 1.15;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, .8), 0 0 18px rgba(255, 179, 71, .4);
+        }
+
+        .pagebuilder-offer-box-desc {
+            color: #E6DDF0;
+        }
     }
 
-    .pagebuilder-offer-box-title {
-        color: @heading__color__base;
-        font-family: @heading__font-family__base;
-        font-weight: @heading__font-weight__base;
+    [data-image-size='medium'] .pagebuilder-offer-box-image {
+        max-height: 140px;
+    }
+
+    [data-image-size='small'] .pagebuilder-offer-box-image {
+        max-height: 85px;
     }
 
     .pagebuilder-offer-box-badge {
@@ -23,8 +52,62 @@
     }
 
     .pagebuilder-offer-box-button {
-        border: 1px solid @primary__color__dark;
+        background: #FFB347;
+        border-radius: 999px;
+        box-shadow: 0 0 14px rgba(255, 179, 71, .5);
+        color: #14091C;
         font-family: @heading__font-family__base;
+        font-size: 14px;
         font-weight: @heading__font-weight__base;
+        letter-spacing: .08em;
+        margin-top: auto;
+        padding: 12px 24px;
+    }
+
+    [data-content-type='offer_box'] > [data-element='link']:hover
+    .pagebuilder-offer-box-wrapper .pagebuilder-offer-box-button {
+        background: #FFC857;
+        color: #14091C;
+    }
+}
+
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    [data-image-size='medium'] .pagebuilder-offer-box-image {
+        max-height: 36px;
+    }
+
+    [data-image-size='small'] .pagebuilder-offer-box-image {
+        max-height: 22px;
+    }
+
+    .pagebuilder-offer-box-wrapper {
+        .pagebuilder-offer-box-content {
+            padding: 21% 25% 22%;
+        }
+
+        .pagebuilder-offer-box-badge {
+            font-size: 10px;
+            margin-bottom: 8px;
+        }
+
+        .pagebuilder-offer-box-title {
+            font-size: 22px;
+            margin-bottom: 6px;
+        }
+
+        .pagebuilder-offer-box-desc {
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .pagebuilder-offer-box-image {
+            margin-bottom: 8px;
+        }
+
+        .pagebuilder-offer-box-button {
+            font-size: 12px;
+            padding: 10px 20px;
+        }
     }
 }
