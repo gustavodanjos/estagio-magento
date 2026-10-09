@@ -59,7 +59,12 @@
                             attr: {
                                 title: $t('Proceed to Checkout')
                             },
-                            click: closeMinicart()
+                            click: closeMinicart(),
+                            shake: {
+                                intensity: 'high',
+                                duration: 500,
+                                trigger: 'hover'
+                            }
                         "
                         translate="'Proceed to Checkout'">
                 </button>
