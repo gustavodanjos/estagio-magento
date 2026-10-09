@@ -146,3 +146,24 @@
         color: #141416;
     }
 }
+
+@keyframes ko-shake {
+    0%, 100% {
+        transform: translate3d(0, 0, 0) rotate(0deg);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: translate3d(var(--ko-shake-distance-neg, -5px), 0, 0) rotate(var(--ko-shake-rotation-neg, -1.5deg));
+    }
+    20%, 40%, 60%, 80% {
+        transform: translate3d(var(--ko-shake-distance, 5px), 0, 0) rotate(var(--ko-shake-rotation, 1.5deg));
+    }
+}
+
+.ko-shake-active {
+    animation-name: ko-shake;
+    animation-duration: var(--ko-shake-duration, 500ms);
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: var(--ko-shake-iteration, 1);
+    transform-origin: center center;
+    will-change: transform;
+}
