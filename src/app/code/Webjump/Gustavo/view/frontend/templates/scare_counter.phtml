@@ -1,0 +1,16 @@
+<?php
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ */
+?>
+<div id="scare-counter"
+     class="scare-counter"
+     data-scare-url="<?= $block->escapeUrl($block->getUrl('halloween/scare')) ?>"
+     data-scare-images="<?= $block->escapeHtmlAttr(json_encode([
+         $block->getViewFileUrl('images/jumpscare.svg'),
+         $block->getViewFileUrl('images/jumpscare2.svg'),
+         $block->getViewFileUrl('images/jumpscare3.svg'),
+     ])) ?>"></div>
+<script type="text/x-magento-init">
+    {"#scare-counter": {"Webjump_Gustavo/js/scare-counter": {}}}
+</script>

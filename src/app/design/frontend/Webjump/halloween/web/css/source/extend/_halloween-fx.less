@@ -148,3 +148,133 @@ body::before {
         animation: none;
     }
 }
+
+
+@scare-z__base: 1200;
+@scare-z__flash: 1300;
+@scare-flash__duration: 600ms;
+
+.scare-counter-badge {
+    position: fixed;
+    top: 100px;
+    right: 24px;
+    z-index: 1250;
+    padding: 14px 26px;
+    border: 1px solid #CB9135;
+    border-radius: 999px;
+    background: rgba(10, 10, 12, 0.92);
+    color: #F5E9D0;
+    font-size: 1.6rem;
+    font-weight: 700;
+    box-shadow: 0 0 18px rgba(232, 115, 42, 0.5);
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 240ms ease, transform 240ms ease;
+    pointer-events: none;
+
+    &--visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+button.scare-pumpkin {
+    position: absolute;
+    z-index: @scare-z__base;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    background: url('@{baseDir}images/loader-pumpkin.svg') center / contain no-repeat;
+    border: 0;
+    cursor: pointer;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.55));
+    opacity: 0;
+    animation: scare-pumpkin-in 320ms ease-out forwards;
+
+    &:hover,
+    &:focus,
+    &:active {
+        background: url('@{baseDir}images/loader-pumpkin.svg') center / contain no-repeat;
+        border: 0;
+    }
+
+    &:hover {
+        filter: drop-shadow(0 4px 14px rgba(232, 115, 42, 0.7));
+    }
+}
+
+@keyframes scare-pumpkin-in {
+    from {
+        opacity: 0;
+        transform: scale(0.6);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.scare-pumpkin:active {
+    animation: scare-pumpkin-pop 300ms ease-out forwards;
+}
+
+@keyframes scare-pumpkin-pop {
+    50% {
+        transform: scale(1.25);
+    }
+
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+.scare-jumpscare {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: @scare-z__flash;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at center, rgba(120, 20, 20, 0.85), rgba(10, 10, 12, 0.98));
+    animation: scare-jumpscare-flash @scare-flash__duration steps(1, end) forwards;
+    pointer-events: none;
+
+    img {
+        width: auto;
+        height: 60vh;
+        max-width: 80vw;
+        animation: scare-jumpscare-zoom @scare-flash__duration ease-out forwards;
+    }
+}
+
+@keyframes scare-jumpscare-flash {
+    0%, 100% {
+        opacity: 0;
+    }
+
+    20%, 80% {
+        opacity: 1;
+    }
+}
+
+@keyframes scare-jumpscare-zoom {
+    from {
+        transform: scale(0.7);
+    }
+
+    to {
+        transform: scale(1.15);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .scare-pumpkin,
+    .scare-jumpscare {
+        display: none;
+    }
+}
