@@ -9,5 +9,12 @@
                    name="selo_sustentavel"
                    template="Webjump_Gustavo::product/badge/selo_sustentavel.phtml" />
         </referenceBlock>
+
+        <referenceContainer name="before.body.end">
+            <block class="Magento\Framework\View\Element\Template"
+                   name="scare_counter"
+                   template="Webjump_Gustavo::scare_counter.phtml"
+                   before="-"/>
+        </referenceContainer>
     </body>
 </page>
