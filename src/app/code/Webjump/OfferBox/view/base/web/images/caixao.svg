@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 440" width="400" height="440" role="img" aria-label="Caixão de Halloween com morcegos, aranhas e teias">
+  <defs>
+    <!-- Contorno externo do caixão -->
+    <path id="coffin-outer" d="M110,14 L290,14 L330,60 L318,420 L82,420 L70,60 Z"/>
+
+    <clipPath id="coffinClip">
+      <use href="#coffin-outer"/>
+    </clipPath>
+
+    <!-- Gradiente roxo da borda -->
+    <linearGradient id="purpleBorder" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7B3DB5"/>
+      <stop offset="1" stop-color="#4A2273"/>
+    </linearGradient>
+
+    <!-- Textura de madeira (tábuas verticais) -->
+    <pattern id="wood" width="68" height="60" patternUnits="userSpaceOnUse">
+      <rect width="34" height="60" fill="#2B1B32"/>
+      <rect x="34" width="34" height="60" fill="#321F3A"/>
+      <rect width="2.5" height="60" fill="#1A0F20"/>
+      <rect x="34" width="2.5" height="60" fill="#1A0F20"/>
+      <path d="M12,0 V60 M24,10 V50 M46,0 V45 M58,12 V60" stroke="#3A2644" stroke-width="1" opacity=".7"/>
+      <ellipse cx="18" cy="30" rx="2.5" ry="4" fill="none" stroke="#1A0F20" stroke-width="1" opacity=".7"/>
+    </pattern>
+
+    <!-- Quarto de teia de aranha (origem no canto 0,0) -->
+    <g id="web" fill="none" stroke="#E6DDF0" stroke-width="1.1" stroke-linecap="round">
+      <path d="M0,0 L65,0 M0,0 L60.1,24.9 M0,0 L46,46 M0,0 L24.9,60.1 M0,0 L0,65"/>
+      <path d="M20,0 Q15.7,3.1 18.5,7.7 Q13.3,8.9 14.1,14.1 Q8.9,13.3 7.7,18.5 Q3.1,15.7 0,20"/>
+      <path d="M35,0 Q27.5,5.5 32.3,13.4 Q23.3,15.6 24.7,24.7 Q15.6,23.3 13.4,32.3 Q5.5,27.5 0,35"/>
+      <path d="M50,0 Q39.2,7.8 46.2,19.1 Q33.2,22.2 35.4,35.4 Q22.2,33.2 19.1,46.2 Q7.8,39.2 0,50"/>
+      <path d="M65,0 Q51,10.1 60.1,24.9 Q43.2,28.9 46,46 Q28.9,43.2 24.9,60.1 Q10.1,51 0,65"/>
+    </g>
+
+    <!-- Aranha -->
+    <g id="spider">
+      <g fill="none" stroke="#F7941D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M-5,-4 L-13,-12 L-17,-5 M-6,-1 L-16,-6 L-19,2 M-6,2 L-16,6 L-18,14 M-5,5 L-12,12 L-13,19"/>
+        <path d="M5,-4 L13,-12 L17,-5 M6,-1 L16,-6 L19,2 M6,2 L16,6 L18,14 M5,5 L12,12 L13,19"/>
+      </g>
+      <ellipse cx="0" cy="3" rx="7" ry="8.5" fill="#F7941D"/>
+      <path d="M0,-1 L-3,4 L0,9 L3,4 Z" fill="#7A2E00"/>
+      <circle cx="0" cy="-7" r="4.5" fill="#FFB347"/>
+      <circle cx="-1.8" cy="-7.5" r="1.1" fill="#fff"/>
+      <circle cx="1.8" cy="-7.5" r="1.1" fill="#fff"/>
+    </g>
+
+    <!-- Morcego -->
+    <g id="bat" fill="#14091C" stroke="#5B3A7A" stroke-width="1" stroke-linejoin="round">
+      <path id="bat-wing" d="M3,-3 C12,-16 30,-20 44,-10 Q38,-6 36,2 Q30,-2 26,6 Q21,0 16,8 Q11,3 4,8 Z"/>
+      <use href="#bat-wing" transform="scale(-1,1)"/>
+      <ellipse cx="0" cy="2" rx="5.5" ry="9"/>
+      <circle cx="0" cy="-8" r="5"/>
+      <path d="M-4.5,-10 L-5,-19 L-0.8,-12.5 Z M4.5,-10 L5,-19 L0.8,-12.5 Z"/>
+      <circle cx="-2" cy="-8.5" r="1" fill="#FFC857" stroke="none"/>
+      <circle cx="2" cy="-8.5" r="1" fill="#FFC857" stroke="none"/>
+    </g>
+  </defs>
+
+  <!-- Borda roxa externa -->
+  <use href="#coffin-outer" fill="url(#purpleBorder)" stroke="#2B1245" stroke-width="3" stroke-linejoin="round"/>
+
+  <!-- Linha de brilho na borda -->
+  <use href="#coffin-outer" transform="translate(200 217) scale(.955) translate(-200 -217)"
+       fill="none" stroke="#9A5FD0" stroke-width="1.5" opacity=".6"/>
+
+  <!-- Miolo de madeira com borda laranja -->
+  <path d="M116,28 L284,28 L316,65 L304,406 L96,406 L84,65 Z"
+        fill="url(#wood)" stroke="#F58A1F" stroke-width="4" stroke-linejoin="round"/>
+
+  <!-- Teias nos 4 cantos -->
+  <g clip-path="url(#coffinClip)" opacity=".85">
+    <use href="#web" transform="translate(110 14) scale(.95)"/>
+    <use href="#web" transform="translate(290 14) scale(-.95 .95)"/>
+    <use href="#web" transform="translate(82 420) scale(.95 -.95)"/>
+    <use href="#web" transform="translate(318 420) scale(-.95 -.95)"/>
+  </g>
+
+  <!-- Aranha pendurada no canto superior esquerdo -->
+  
+  <use href="#spider" transform="translate(120 35) scale(.9)"/>
+
+  <!-- Aranha pequena no canto inferior direito -->
+  <use href="#spider" transform="translate(290 388) rotate(20) scale(.7)"/>
+
+  <!-- Morcegos -->
+  <use href="#bat" transform="translate(46 48) rotate(-18) scale(.8)"/>
+  <use href="#bat" transform="translate(338 78) rotate(12) scale(1.05)"/>
+  <use href="#bat" transform="translate(78 392) rotate(-8) scale(1)"/>
+</svg>
