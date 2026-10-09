@@ -1,6 +1,7 @@
 define([
-    'halloween-fx/bats'
-], function (bats) {
+    'halloween-fx/bats',
+    'halloween-fx/scare'
+], function (bats, scare) {
     'use strict';
 
     var REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)',
@@ -17,7 +18,10 @@ define([
     }
 
     function start() {
-        bats.init({ enabled: isMotionAllowed() && !isTransactional() });
+        var enabled = isMotionAllowed() && !isTransactional();
+
+        bats.init({ enabled: enabled });
+        scare.init({ enabled: enabled });
     }
 
     if (document.readyState === 'loading') {
