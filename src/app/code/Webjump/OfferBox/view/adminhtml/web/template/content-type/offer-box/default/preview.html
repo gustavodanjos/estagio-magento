@@ -10,14 +10,6 @@
          attr="Object.assign({}, data.wrapper.attributes(), data.main.attributes())"
          ko-style="Object.assign({}, data.wrapper.style(), data.main.style())"
          css="Object.assign({}, data.wrapper.css(), data.main.css())">
-        <img if="data.image.attributes().src"
-             class="pagebuilder-offer-box-image"
-             attr="data.image.attributes"
-             ko-style="data.image.style"
-             css="data.image.css" />
-        <!-- ko ifnot: data.image.attributes().src -->
-        <div class="pagebuilder-offer-box-image-placeholder"></div>
-        <!-- /ko -->
         <div class="pagebuilder-offer-box-content">
             <!-- ko if: data.badge.html() -->
             <!-- ko with: data.badge -->
@@ -35,6 +27,14 @@
             <!-- ko with: {attributes: attributes, style: style, css: css, dataDescUnsanitizedHtml: html} -->
             <div class="pagebuilder-offer-box-desc" attr="attributes" ko-style="style" css="css" html="dataDescUnsanitizedHtml"></div>
             <!-- /ko -->
+            <!-- /ko -->
+            <img if="data.image.attributes().src"
+                 class="pagebuilder-offer-box-image"
+                 attr="data.image.attributes"
+                 ko-style="data.image.style"
+                 css="data.image.css" />
+            <!-- ko ifnot: data.image.attributes().src -->
+            <div class="pagebuilder-offer-box-image-placeholder"></div>
             <!-- /ko -->
             <!-- ko if: data.button.html() -->
             <!-- ko with: data.button -->
