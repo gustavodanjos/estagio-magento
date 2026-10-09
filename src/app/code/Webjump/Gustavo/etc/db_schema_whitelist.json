@@ -13,5 +13,15 @@
             "PRIMARY": true,
             "WEBJUMP_GUSTAVO_REVIEW_PRD_ID_CAT_PRD_ENTT_ENTT_ID": true
         }
+    },
+    "quote": {
+        "column": {
+            "webjump_gustavo_mensagem": true
+        }
+    },
+    "sales_order": {
+        "column": {
+            "webjump_gustavo_mensagem": true
+        }
     }
 }
